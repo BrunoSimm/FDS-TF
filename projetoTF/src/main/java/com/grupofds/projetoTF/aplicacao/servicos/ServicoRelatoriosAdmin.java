@@ -1,12 +1,8 @@
 package com.grupofds.projetoTF.aplicacao.servicos;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import com.grupofds.projetoTF.negocio.entidades.Comentario;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
@@ -116,7 +112,7 @@ public class ServicoRelatoriosAdmin {
         return (double) (totalReclamacoesEncerradas / totalReclamacoes);
     }
 
-    public double getPercentualRespondidoByUserOficial(Long usuarioId, Long idUsuarioOficial) {
+    public double getPercentualRespondidoByUserOficial(Long usuarioId) {
         this.validaUsuario(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
         int totalReclamacoes = aux.size();
@@ -127,7 +123,7 @@ public class ServicoRelatoriosAdmin {
 
     }
 
-    public double getPercentualEncerradasByUserOficial(Long usuarioId, Long idUsuarioOficial) {
+    public double getPercentualEncerradasByUserOficial(Long usuarioId) {
         this.validaUsuario(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
         int totalReclamacoes = aux.size();
