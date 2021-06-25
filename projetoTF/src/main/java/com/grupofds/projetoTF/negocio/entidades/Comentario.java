@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.grupofds.projetoTF.negocio.entidades.usuarios.Usuario;
+
 @Entity
 @Table(name = "cometarios")
 public class Comentario {
