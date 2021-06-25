@@ -70,7 +70,7 @@ public class ServicoRelatoriosAdmin {
         List<Comentario> aux = repositorioComentarios.getByPeriodo(periodoInicial, periodoFinal);
         int totalComentarios = aux.size();
         int totalReclamacoes = aux.stream()
-            .map(Comentario::getIdReclamacao)
+            .map(Comentario::getReclamacao)
             .collect(Collectors.toSet())
             .size();
         return (double) (totalComentarios / totalReclamacoes);
