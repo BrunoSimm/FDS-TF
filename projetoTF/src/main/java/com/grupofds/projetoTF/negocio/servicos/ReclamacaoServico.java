@@ -11,43 +11,41 @@ public class ReclamacaoServico {
 
     private IRepositorioReclamacoes repositorioReclamacoes;
     
-    public Reclamacao updateReclamacao(long usuarioId, long reclamacaoId, Reclamacao novosDadosReclamacao) {
+    public Reclamacao updateReclamacao(Long usuarioId, Long reclamacaoId, Reclamacao novosDadosReclamacao) {
         // TODO: Validar solicitação do usuário 
-        repositorioReclamacoes.atualizaReclamacao(novosDadosReclamacao);
+        repositorioReclamacoes.updateReclamacao(novosDadosReclamacao);
         return null;
     }
 
     public Reclamacao createReclamacao(Reclamacao reclamacao) {
-        return null;
+        return repositorioReclamacoes.createReclamacao(reclamacao);
     }
 
-    public Reclamacao encerraReclamacao(long usuarioOficialId, long reclmacaoId) {
+    public Reclamacao encerraReclamacao(Long usuarioOficialId, Long reclamacaoId) {
         // TODO: Validar solicitação do usuário
         
-        Reclamacao reclamacao = repositorioReclamacoes.getById(reclmacaoId);
+        Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
         reclamacao.setStatus(StatusReclamacoes.ENCERRADA);
-        repositorioReclamacoes.atualizaReclamacao(reclamacao);
-        return null;
+        return repositorioReclamacoes.updateReclamacao(reclamacao);
     }
 
-    public Reclamacao getReclamacaoById(long reclamacaoId) {
-        repositorioReclamacoes.getById(reclamacaoId);
-        return null;
+    public Reclamacao getReclamacaoById(Long reclamacaoId) {
+        return repositorioReclamacoes.getById(reclamacaoId);
     }
 
     public List<Reclamacao> getReclamacoesByCategoria(String categoria) {
-        return null;
+        return repositorioReclamacoes.getByCategoria(categoria);
     }
     
-    public List<Reclamacao> getReclamacoesByUsuario(long idUsuario) {
-        return null;
+    public List<Reclamacao> getReclamacoesByUsuario(Long idUsuario) {
+        return repositorioReclamacoes.getByUsuario(idUsuario);
     }
 
-    public List<Reclamacao> getRelclamacoesByPeriodo(LocalDateTime periodo) {
-        return null;
+    public List<Reclamacao> getRelclamacoesByPeriodo(LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
+        return repositorioReclamacoes.getByPeriodo(periodoInicial, periodoFinal);
     }
 
     public List<Reclamacao> getReclamacoesByBairro(String bairro) {
-        return null;
+        return repositorioReclamacoes.getByBairro(bairro);
     }
 }
