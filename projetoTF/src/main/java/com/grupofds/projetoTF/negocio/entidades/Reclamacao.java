@@ -49,13 +49,13 @@ public class Reclamacao {
 	@Column
 	@NotBlank
 	@Enumerated(EnumType.STRING)
-	private STATUS_RECLAMACOES status;
+	private StatusReclamacoes status;
 	
 	@OneToMany(mappedBy = "reclamacao")
 	private List<Comentario> comentarios;
 	
 	public Reclamacao(Long id, String titulo, String descricao, LocalDateTime data, Endereco endereco, String imagem,
-			Categoria categoria, STATUS_RECLAMACOES status, List<Comentario> comentarios) {
+			Categoria categoria, StatusReclamacoes status, List<Comentario> comentarios) {
 		this.id = id;
 		this.titulo = titulo;
 		this.descricao = descricao;
@@ -109,10 +109,10 @@ public class Reclamacao {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	public STATUS_RECLAMACOES getStatus() {
+	public StatusReclamacoes getStatus() {
 		return status;
 	}
-	public void setStatus(STATUS_RECLAMACOES status) {
+	public void setStatus(StatusReclamacoes status) {
 		this.status = status;
 	}
 	public List<Comentario> getComentarios() {
