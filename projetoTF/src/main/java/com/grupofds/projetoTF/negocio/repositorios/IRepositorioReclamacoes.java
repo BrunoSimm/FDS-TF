@@ -7,10 +7,10 @@ import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 
 public interface IRepositorioReclamacoes {
     public Reclamacao createReclamacao(Reclamacao reclamacao);
-    public Reclamacao atualizaReclamacao(Reclamacao reclamacao);
+    public Reclamacao updateReclamacao(Reclamacao reclamacao);
     public Reclamacao getById(Long id);
     public List<Reclamacao> getByUsuario(Long id);
     public List<Reclamacao> getByCategoria(String categoria);
     public List<Reclamacao> getByBairro(String bairro);
-    public List<Reclamacao> getByPeriodo(LocalDateTime periodo);
+    public List<Reclamacao> getByPeriodo(LocalDateTime periodoInicial, LocalDateTime periodoFinal);
 }
