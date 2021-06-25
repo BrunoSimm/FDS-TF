@@ -1,7 +1,6 @@
 package com.grupofds.projetoTF.negocio.servicos;
 
 import com.grupofds.projetoTF.negocio.entidades.Comentario;
-import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 import com.grupofds.projetoTF.negocio.entidades.usuarios.CategoriaDeUsuario;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioComentarios;
@@ -17,12 +16,13 @@ public class ComentariosServico {
     
     @Autowired
     public ComentariosServico(IRepositorioComentarios repositorioComentarios,
-            IRepositorioUsuarios repositorioUsuarios) {
-        this.repositorioComentarios = repositorioComentarios;
-        this.repositorioUsuarios = repositorioUsuarios;
-    }
+			IRepositorioReclamacoes repositorioReclamacoes, IRepositorioUsuarios repositorioUsuarios) {
+		this.repositorioComentarios = repositorioComentarios;
+		this.repositorioReclamacoes = repositorioReclamacoes;
+		this.repositorioUsuarios = repositorioUsuarios;
+	}
 
-    public Comentario addComentario(Long usuarioId, Long idReclamacao, String mensagem, String imagem, StatusReclamacoes status) {
+	public Comentario addComentario(Long usuarioId, Long idReclamacao, String mensagem, String imagem, StatusReclamacoes status) {
         this.validaUsuario(usuarioId);
         if (repositorioReclamacoes.getById(idReclamacao).getStatus() == StatusReclamacoes.ENCERRADA) {
             throw new IllegalArgumentException("Impossivel adicionar Comentario. Reclamacao com status ENCERRADA.");

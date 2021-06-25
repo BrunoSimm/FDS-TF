@@ -33,7 +33,6 @@ public class Comentario {
     private String descricao;
 
     @Column
-	@NotBlank(message = "Data deve ser preenchida.")
 	private LocalDateTime data;
 	
     @Column(nullable = true)
@@ -43,15 +42,16 @@ public class Comentario {
     @JoinColumn(name = "id_reclamacao_fk", nullable = false)
     private Reclamacao reclamacao;
     
-    public Comentario(Long id, Usuario usuario, @NotBlank(message = "Descrição deve sere preenchida.") String descricao,
-			String imagem, Reclamacao reclamacao) {
+	public Comentario(Long id, Usuario usuario, @NotBlank(message = "Descrição deve sere preenchida.") String descricao,
+			LocalDateTime data, String imagem, Reclamacao reclamacao) {
 		this.id = id;
 		this.usuario = usuario;
 		this.descricao = descricao;
+		this.data = data;
 		this.imagem = imagem;
 		this.reclamacao = reclamacao;
 	}
-
+	
 	public Reclamacao getReclamacao() {
 		return reclamacao;
 	}

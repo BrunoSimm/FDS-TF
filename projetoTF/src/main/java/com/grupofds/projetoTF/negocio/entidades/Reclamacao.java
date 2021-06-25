@@ -64,10 +64,15 @@ public class Reclamacao {
 	@OneToMany(mappedBy = "reclamacao")
 	private List<Comentario> comentarios;
 	
-	
-	public Reclamacao(Long id, String titulo, String descricao, LocalDateTime data, Endereco endereco, String imagem,
-			String categoria, StatusReclamacoes status, List<Comentario> comentarios) {
+	public Reclamacao(Long id, Usuario usuario, @NotBlank(message = "Titulo deve ser preenchido.") String titulo,
+			@NotBlank(message = "Descrição deve ser preenchido.") String descricao,
+			@NotBlank(message = "Data deve ser preenchida.") LocalDateTime data,
+			@NotBlank(message = "Endereço deve ser preenchido.") Endereco endereco, @NotBlank String imagem,
+			@NotBlank(message = "Categoria deve ser preenchida.") String categoria,
+			@NotBlank(message = "O status deve ser definido como ABERTA, RESOLVIDA ou ENCERRADA") StatusReclamacoes status,
+			List<Comentario> comentarios) {
 		this.id = id;
+		this.usuario = usuario;
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.data = data;
@@ -77,7 +82,15 @@ public class Reclamacao {
 		this.status = status;
 		this.comentarios = comentarios;
 	}
-	
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public Long getId() {
 		return id;
 	}

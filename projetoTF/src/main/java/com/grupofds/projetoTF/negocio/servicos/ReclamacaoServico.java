@@ -3,18 +3,38 @@ package com.grupofds.projetoTF.negocio.servicos;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
+import com.grupofds.projetoTF.negocio.entidades.usuarios.CategoriaDeUsuario;
+import com.grupofds.projetoTF.negocio.entidades.usuarios.Usuario;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
+import com.grupofds.projetoTF.negocio.repositorios.IRepositorioUsuarios;
 
 public class ReclamacaoServico {
 
     private IRepositorioReclamacoes repositorioReclamacoes;
+    private IRepositorioUsuarios repositorioUsuarios;
     
-    public Reclamacao updateReclamacao(Long usuarioId, Long reclamacaoId, Reclamacao novosDadosReclamacao) {
-        // TODO: Validar solicitação do usuário 
-        repositorioReclamacoes.updateReclamacao(novosDadosReclamacao);
-        return null;
+    @Autowired
+    public ReclamacaoServico(IRepositorioReclamacoes repositorioReclamacoes,IRepositorioUsuarios repositorioUsuarios) {
+		this.repositorioReclamacoes = repositorioReclamacoes;
+		this.repositorioUsuarios = repositorioUsuarios;
+	}
+
+	public Reclamacao updateReclamacao(Long usuarioId, Long reclamacaoId, Reclamacao novosDadosReclamacao) {
+    	Usuario user = repositorioUsuarios.getById(usuarioId);
+    	if (user != null) {
+    		Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
+    		if ((reclamacao == null)) {
+    			throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id válido."); //TODO -> ReclamacaoNotFoundException
+    		} else {
+    			if (user.getId() == reclamacao.getUsuario().getId()) {
+    				return repositorioReclamacoes.updateReclamacao(novosDadosReclamacao);
+    			} else throw new IllegalArgumentException("Usuário de Id" + user.getId() +"não possui permissão para atualizar esta reclamacação.");
+    		}
+    	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido."); //TODO -> UserNotFoundException
     }
 
     public Reclamacao createReclamacao(Reclamacao reclamacao) {
@@ -22,11 +42,21 @@ public class ReclamacaoServico {
     }
 
     public Reclamacao encerraReclamacao(Long usuarioOficialId, Long reclamacaoId) {
-        // TODO: Validar solicitação do usuário
-        
-        Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
-        reclamacao.setStatus(StatusReclamacoes.ENCERRADA);
-        return repositorioReclamacoes.updateReclamacao(reclamacao);
+    	Usuario user = repositorioUsuarios.getById(usuarioOficialId);
+    	if ((user != null)) {
+    		if (user.getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL) {
+    			throw new IllegalArgumentException("ERRO! Usuário não possui as permissões necessárias para encerrar esta Reclamação."); //TODO -> PermissoesException
+    		} else {
+    			Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
+        		if ((reclamacao == null)) {
+        			throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id válido."); //TODO -> ReclamacaoNotFoundException
+        		} else {
+        			reclamacao.setStatus(StatusReclamacoes.ENCERRADA);
+        			return repositorioReclamacoes.updateReclamacao(reclamacao);
+        		}
+    		}
+    		
+    	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido."); //TODO -> UserNotFoundException
     }
 
     public Reclamacao getReclamacaoById(Long reclamacaoId) {
@@ -41,7 +71,7 @@ public class ReclamacaoServico {
         return repositorioReclamacoes.getByUsuario(idUsuario);
     }
 
-    public List<Reclamacao> getRelclamacoesByPeriodo(LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
+    public List<Reclamacao> getReclamacoesByPeriodo(LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
         return repositorioReclamacoes.getByPeriodo(periodoInicial, periodoFinal);
     }
 
