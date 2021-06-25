@@ -3,6 +3,7 @@ package com.grupofds.projetoTF.negocio.entidades;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,9 +11,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+
+import com.grupofds.projetoTF.negocio.entidades.usuarios.Usuario;
 
 @Entity
 @Table(name = "reclamacoes")
@@ -21,6 +26,10 @@ public class Reclamacao {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
+	private Usuario usuario;
 	
 	@Column
 	@NotBlank(message = "Titulo deve ser preenchido.")
@@ -34,8 +43,9 @@ public class Reclamacao {
 	@NotBlank(message = "Data deve ser preenchida.")
 	private LocalDateTime data;
 	
-	@Column
-	@NotBlank
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
+	@NotBlank(message = "Endereço deve ser preenchido.")
 	private Endereco endereco;
 	
 	@Column
@@ -43,19 +53,20 @@ public class Reclamacao {
 	private String imagem;
 	
 	@Column
-	@NotBlank
-	private Categoria categoria;
+	@NotBlank(message = "Categoria deve ser preenchida.")
+	private String categoria;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message = "O status deve ser definido como ABERTA, RESOLVIDA ou ENCERRADA")
 	@Enumerated(EnumType.STRING)
 	private StatusReclamacoes status;
 	
 	@OneToMany(mappedBy = "reclamacao")
 	private List<Comentario> comentarios;
 	
+	
 	public Reclamacao(Long id, String titulo, String descricao, LocalDateTime data, Endereco endereco, String imagem,
-			Categoria categoria, StatusReclamacoes status, List<Comentario> comentarios) {
+			String categoria, StatusReclamacoes status, List<Comentario> comentarios) {
 		this.id = id;
 		this.titulo = titulo;
 		this.descricao = descricao;
@@ -103,10 +114,10 @@ public class Reclamacao {
 	public void setImagem(String imagem) {
 		this.imagem = imagem;
 	}
-	public Categoria getCategoria() {
+	public String getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
 	public StatusReclamacoes getStatus() {

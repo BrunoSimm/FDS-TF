@@ -32,8 +32,29 @@ public class Usuario {
     @Column(nullable = false)
     private CategoriaDeUsuario categoriaDeUsuario;
 
+	public Usuario(Long id, @NotNull(message = "Nome inválido") String nome,
+			@Email(message = "E-mail inválido") String email,
+			@NotNull(message = "Categoria inválida") CategoriaDeUsuario categoriaDeUsuario) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.categoriaDeUsuario = categoriaDeUsuario;
+	}
+	
+	 public CategoriaDeUsuario getCategoriaDeUsuario() {
+			return categoriaDeUsuario;
+	}
 
-    public Long getId() {
+	public void setCategoriaDeUsuario(CategoriaDeUsuario categoriaDeUsuario) {
+			this.categoriaDeUsuario = categoriaDeUsuario;
+	}
+
+	public void setId(Long id) {
+			this.id = id;
+	}
+
+	public Long getId() {
         return id;
     }
 

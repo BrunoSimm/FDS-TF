@@ -1,10 +1,13 @@
 package com.grupofds.projetoTF.negocio.entidades;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
@@ -18,33 +21,54 @@ public class Endereco {
 	private Long id;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message = "Bairro deve ser preenchido.")
 	private String bairro;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message = "Logradouro deve ser preenchido.")
 	private String logradouro;
 	
 	@Column(nullable = true)
-	@Positive
+	@Positive(message = "Numero deve ser positivo.")
 	private String numero;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message = "Cidade deve ser preenchido.")
 	private String cidade;
 	
 	@Column
-	@NotBlank
+	@NotBlank(message = "Estado deve ser preenchido.")
 	private String estado;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "reclamacao_id", referencedColumnName = "id")
+	private Reclamacao reclamacao;
 
-	public Endereco(Long id, String bairro, String logradouro, String numero, String cidade, String estado) {
+	public Endereco(Long id, @NotBlank(message = "Bairro deve ser preenchido.") String bairro,
+			@NotBlank(message = "Logradouro deve ser preenchido.") String logradouro,
+			@Positive(message = "Numero deve ser positivo.") String numero,
+			@NotBlank(message = "Cidade deve ser preenchido.") String cidade,
+			@NotBlank(message = "Estado deve ser preenchido.") String estado, Reclamacao reclamacao) {
 		this.id = id;
 		this.bairro = bairro;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.cidade = cidade;
 		this.estado = estado;
+		this.reclamacao = reclamacao;
 	}
+
+
+	public Reclamacao getReclamacao() {
+		return reclamacao;
+	}
+
+
+	public void setReclamacao(Reclamacao reclamacao) {
+		this.reclamacao = reclamacao;
+	}
+
+
 
 	public Long getId() {
 		return id;
