@@ -7,12 +7,15 @@ import com.grupofds.projetoTF.negocio.entidades.Comentario;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 import com.grupofds.projetoTF.negocio.entidades.usuarios.CategoriaDeUsuario;
+import com.grupofds.projetoTF.negocio.entidades.usuarios.Usuario;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioComentarios;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioUsuarios;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ServicoRelatoriosAdmin {
     private IRepositorioReclamacoes repositorioReclamacoes;
     private IRepositorioComentarios repositorioComentarios;
@@ -112,7 +115,7 @@ public class ServicoRelatoriosAdmin {
         return (double) (totalReclamacoesEncerradas / totalReclamacoes);
     }
 
-    public double getPercentualRespondidoByUserOficial(Long usuarioId) {
+    public double getPercentualRespondidoByUsersOficiais(Long usuarioId) {
         this.validaUsuario(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
         int totalReclamacoes = aux.size();
@@ -122,6 +125,24 @@ public class ServicoRelatoriosAdmin {
         return (double) (totalReclamacoesRespondidas / totalReclamacoes);
 
     }
+    
+    public double getPercentualRespondidoByUserOficial(Long usuarioId, Long usuarioOficialId) {
+    	
+    	this.validaUsuario(usuarioId);
+    	
+    	Usuario userOficial = repositorioUsuarios.getById(usuarioOficialId);
+    	
+    	if (userOficial == null) {
+    		throw new IllegalArgumentException("Usuario sem permissao de acesso a funcao.");
+    	}
+    		
+	        List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
+	        int totalReclamacoes = aux.size();
+	        int totalReclamacoesRespondidas = (int) aux.stream()
+	            .filter(r -> r.getComentarios().stream().anyMatch(c -> c.getUsuario().equals(userOficial)))
+	            .count();
+	        return (double) (totalReclamacoesRespondidas / totalReclamacoes);
+    	}
 
     public double getPercentualEncerradasByUserOficial(Long usuarioId) {
         this.validaUsuario(usuarioId);

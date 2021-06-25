@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
@@ -12,6 +13,7 @@ import com.grupofds.projetoTF.negocio.entidades.usuarios.Usuario;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioUsuarios;
 
+@Service
 public class ReclamacaoServico {
 
     private IRepositorioReclamacoes repositorioReclamacoes;

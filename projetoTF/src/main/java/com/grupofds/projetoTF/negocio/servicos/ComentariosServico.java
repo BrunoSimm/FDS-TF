@@ -8,7 +8,9 @@ import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioUsuarios;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ComentariosServico {
     private IRepositorioComentarios repositorioComentarios;
     private IRepositorioReclamacoes repositorioReclamacoes;
