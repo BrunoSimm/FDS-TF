@@ -33,7 +33,7 @@ public class Usuario {
     private CategoriaDeUsuario categoriaDeUsuario;
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

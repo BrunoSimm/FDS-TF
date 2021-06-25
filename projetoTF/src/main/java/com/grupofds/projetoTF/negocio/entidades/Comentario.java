@@ -15,7 +15,6 @@ import com.grupofds.projetoTF.negocio.entidades.usuarios.Usuario;
 @Table(name = "cometarios")
 public class Comentario {
 
-<<<<<<< HEAD
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -72,7 +71,4 @@ public class Comentario {
         this.reclamacao = reclamacao;
     }
     
-=======
-	
->>>>>>> 831bcb8f7d29960ac5c80dd9d6f7247b653df398
 }
