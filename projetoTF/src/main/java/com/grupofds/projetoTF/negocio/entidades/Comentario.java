@@ -1,5 +1,7 @@
 package com.grupofds.projetoTF.negocio.entidades;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +32,9 @@ public class Comentario {
     @NotBlank(message = "Descrição deve sere preenchida.")
     private String descricao;
 
+    @Column
+	private LocalDateTime data;
+	
     @Column(nullable = true)
     private String imagem;
 
@@ -37,24 +42,29 @@ public class Comentario {
     @JoinColumn(name = "id_reclamacao_fk", nullable = false)
     private Reclamacao reclamacao;
     
-    public Comentario(Long id, Usuario usuario, @NotBlank(message = "Descrição deve sere preenchida.") String descricao,
-			String imagem, Reclamacao reclamacao) {
+	public Comentario(Long id, Usuario usuario, @NotBlank(message = "Descrição deve sere preenchida.") String descricao,
+			LocalDateTime data, String imagem, Reclamacao reclamacao) {
 		this.id = id;
 		this.usuario = usuario;
 		this.descricao = descricao;
+		this.data = data;
 		this.imagem = imagem;
 		this.reclamacao = reclamacao;
 	}
-
+	
 	public Reclamacao getReclamacao() {
 		return reclamacao;
 	}
-
 	public void setReclamacao(Reclamacao reclamacao) {
 		this.reclamacao = reclamacao;
 	}
-
-	public Long getId() {
+	public LocalDateTime getData() {
+        return data;
+    }
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
+    public Long getId() {
         return id;
     }
     public void setId(Long id) {
@@ -77,12 +87,6 @@ public class Comentario {
     }
     public void setImagem(String imagem) {
         this.imagem = imagem;
-    }
-    public Reclamacao getIdReclamacao() {
-        return reclamacao;
-    }
-    public void setIdReclamacao(Reclamacao reclamacao) {
-        this.reclamacao = reclamacao;
     }
     
 }
