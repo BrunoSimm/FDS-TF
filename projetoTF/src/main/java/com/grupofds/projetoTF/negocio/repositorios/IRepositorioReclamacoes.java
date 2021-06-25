@@ -10,7 +10,7 @@ public interface IRepositorioReclamacoes {
     public Reclamacao atualizaReclamacao(Reclamacao reclamacao);
     public Reclamacao getById(Long id);
     public List<Reclamacao> getByUsuario(Long id);
-    public List<Reclamacao> getByCategoria(Long idCategoria);
+    public List<Reclamacao> getByCategoria(String categoria);
     public List<Reclamacao> getByBairro(String bairro);
     public List<Reclamacao> getByPeriodo(LocalDateTime periodo);
 }
