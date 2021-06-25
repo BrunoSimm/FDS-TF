@@ -36,7 +36,6 @@ public class ReclamacaoServico {
     }
 
     public List<Reclamacao> getReclamacoesByCategoria(String categoria) {
-        Reclamacao reclamacao = repositorioReclamacoes.getByCategoria(categoria);
         return null;
     }
     
