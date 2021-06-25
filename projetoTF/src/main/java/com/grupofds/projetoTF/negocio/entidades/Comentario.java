@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,18 +22,19 @@ public class Comentario {
     @Column
     private String descricao;
 
-    @Column
+    @Column(nullable = true)
     private String imagem;
 
-    @Column
-    private Long idReclamacao;
+    @ManyToOne
+    @JoinColumn(name = "id_reclamacao_fk")
+    private Reclamacao reclamacao;
     
-    public Comentario(Long id, Usuario usuario, String descricao, String imagem, Long idReclamacao) {
+    public Comentario(Long id, Usuario usuario, String descricao, String imagem, Reclamacao reclamacao) {
         this.id = id;
         this.usuario = usuario;
         this.descricao = descricao;
         this.imagem = imagem;
-        this.idReclamacao = idReclamacao;
+        this.reclamacao = reclamacao;
     }
 
     public Long getId() {
@@ -58,11 +61,11 @@ public class Comentario {
     public void setImagem(String imagem) {
         this.imagem = imagem;
     }
-    public Long getIdReclamacao() {
-        return idReclamacao;
+    public Reclamacao getIdReclamacao() {
+        return reclamacao;
     }
-    public void setIdReclamacao(Long idReclamacao) {
-        this.idReclamacao = idReclamacao;
+    public void setIdReclamacao(Reclamacao reclamacao) {
+        this.reclamacao = reclamacao;
     }
     
 }
