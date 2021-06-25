@@ -1,5 +1,6 @@
 package com.grupofds.projetoTF.negocio.repositorios;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.grupofds.projetoTF.negocio.entidades.Comentario;
@@ -13,4 +14,5 @@ public interface IRepositorioComentarios {
     public List<Comentario> getByReclamacao(Long idReclamacao);
     public List<Comentario> getByUsuario(Long idUsuario);
     public List<Comentario> getByStatus(StatusReclamacoes status);
+    public List<Comentario> getByPeriodo(LocalDateTime periodoInicial, LocalDateTime periodoFinal);
 }

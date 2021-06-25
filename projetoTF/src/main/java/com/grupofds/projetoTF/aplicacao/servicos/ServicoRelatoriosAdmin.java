@@ -22,7 +22,6 @@ public class ServicoRelatoriosAdmin {
 
     public Long getTotalReclamacoesByCategoriaAndPeriodo(Long usuarioId, String categoria, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
         // TODO: acessar repositorio de usuario
-        // TODO: cadê o getCategoriaDeUsuario???????????????
         // if (usuario.categoria)
         return repositorioReclamacoes.getByCategoria(categoria).stream()
             .filter(r -> !r.getData().isBefore(periodoInicial) && !r.getData().isAfter(periodoFinal))

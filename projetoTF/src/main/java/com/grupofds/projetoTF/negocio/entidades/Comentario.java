@@ -1,5 +1,7 @@
 package com.grupofds.projetoTF.negocio.entidades;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +32,10 @@ public class Comentario {
     @NotBlank(message = "Descrição deve sere preenchida.")
     private String descricao;
 
+    @Column
+	@NotBlank(message = "Data deve ser preenchida.")
+	private LocalDateTime data;
+	
     @Column(nullable = true)
     private String imagem;
 
