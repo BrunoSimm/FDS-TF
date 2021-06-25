@@ -31,7 +31,7 @@ public class ReclamacaoServico {
     }
 
     public Reclamacao getReclamacaoById(long reclamacaoId) {
-        Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
+        repositorioReclamacoes.getById(reclamacaoId);
         return null;
     }
 
