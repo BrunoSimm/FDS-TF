@@ -41,7 +41,7 @@ public class Usuario {
         return nome;
     }
 
-    public Email getEmail() {
+    public String getEmail() {
         return email;
     }
     
@@ -53,7 +53,7 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
