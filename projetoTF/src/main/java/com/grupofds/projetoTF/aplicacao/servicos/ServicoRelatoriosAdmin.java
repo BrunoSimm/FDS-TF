@@ -70,7 +70,7 @@ public class ServicoRelatoriosAdmin {
         List<Comentario> aux = repositorioComentarios.getByPeriodo(periodoInicial, periodoFinal);
         int totalComentarios = aux.size();
         int totalReclamacoes = aux.stream()
-            .map(Comentario::getIdReclamacao)
+            .map(Comentario::getReclamacao)
             .collect(Collectors.toSet())
             .size();
         return (double) (totalComentarios / totalReclamacoes);
@@ -100,32 +100,42 @@ public class ServicoRelatoriosAdmin {
         this.validaUsuario(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getByCategoria(categoria);
         int totalReclamacoes = aux.size();
-        int totalReclamacoesResolvidas = (int) aux.stream()
+        int totalReclamacoesEncerradas = (int) aux.stream()
             .filter(r -> r.getStatus() == StatusReclamacoes.ENCERRADA)
             .count();
-        return (double) (totalReclamacoesResolvidas / totalReclamacoes);
+        return (double) (totalReclamacoesEncerradas / totalReclamacoes);
     }
 
     public double getPercentualEncerradoByBairro(Long usuarioId, String bairro) {
         this.validaUsuario(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getByBairro(bairro);
         int totalReclamacoes = aux.size();
-        int totalReclamacoesResolvidas = (int) aux.stream()
+        int totalReclamacoesEncerradas = (int) aux.stream()
             .filter(r -> r.getStatus() == StatusReclamacoes.ENCERRADA)
             .count();
-        return (double) (totalReclamacoesResolvidas / totalReclamacoes);
+        return (double) (totalReclamacoesEncerradas / totalReclamacoes);
     }
 
     public double getPercentualRespondidoByUserOficial(Long usuarioId, Long idUsuarioOficial) {
         this.validaUsuario(usuarioId);
-        //TODO: ter acesso a todas reclamacoes!!!!
-/*         List<Reclamacao> aux = repositorioReclamacoes.getByCategoria(categoria);
+        List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
         int totalReclamacoes = aux.size();
-        int totalReclamacoesResolvidas = (int) aux.stream()
-            .filter(r -> r.getStatus() == StatusReclamacoes.RESOLVIDA)
+        int totalReclamacoesRespondidas = (int) aux.stream()
+            .filter(r -> r.getComentarios().stream().anyMatch(c -> c.getUsuario().getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL))
             .count();
-        return (double) (totalReclamacoesResolvidas / totalReclamacoes);
- */
+        return (double) (totalReclamacoesRespondidas / totalReclamacoes);
+
+    }
+
+    public double getPercentualEncerradasByUserOficial(Long usuarioId, Long idUsuarioOficial) {
+        this.validaUsuario(usuarioId);
+        List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
+        int totalReclamacoes = aux.size();
+        int totalReclamacoesEncerradas = (int) aux.stream()
+            .filter(r -> r.getStatus() == StatusReclamacoes.ENCERRADA)
+            .count();
+        return (double) (totalReclamacoesEncerradas / totalReclamacoes);
+
     }
 
     private void validaUsuario(Long usuarioId) {
