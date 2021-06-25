@@ -13,4 +13,5 @@ public interface IRepositorioReclamacoes {
     public List<Reclamacao> getByCategoria(String categoria);
     public List<Reclamacao> getByBairro(String bairro);
     public List<Reclamacao> getByPeriodo(LocalDateTime periodoInicial, LocalDateTime periodoFinal);
+    public List<Reclamacao> getReclamacoes();
 }

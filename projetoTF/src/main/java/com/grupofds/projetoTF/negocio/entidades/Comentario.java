@@ -55,12 +55,16 @@ public class Comentario {
 	public Reclamacao getReclamacao() {
 		return reclamacao;
 	}
-
 	public void setReclamacao(Reclamacao reclamacao) {
 		this.reclamacao = reclamacao;
 	}
-
-	public Long getId() {
+	public LocalDateTime getData() {
+        return data;
+    }
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
+    public Long getId() {
         return id;
     }
     public void setId(Long id) {
@@ -83,12 +87,6 @@ public class Comentario {
     }
     public void setImagem(String imagem) {
         this.imagem = imagem;
-    }
-    public Reclamacao getIdReclamacao() {
-        return reclamacao;
-    }
-    public void setIdReclamacao(Reclamacao reclamacao) {
-        this.reclamacao = reclamacao;
     }
     
 }
