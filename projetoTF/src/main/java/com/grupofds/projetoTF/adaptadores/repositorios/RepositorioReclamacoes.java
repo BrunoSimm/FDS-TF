@@ -16,23 +16,31 @@ import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
 @Repository
 public interface RepositorioReclamacoes extends IRepositorioReclamacoes, JpaRepository<Reclamacao, Long> {
 	
-	Reclamacao createReclamacao(Reclamacao reclamacao);
-    Reclamacao updateReclamacao(Reclamacao reclamacao);
+	default Reclamacao createReclamacao(Reclamacao reclamacao) {
+		return this.save(reclamacao);
+	}
+	
+    default Reclamacao updateReclamacao(Reclamacao reclamacao) {
+    	return this.save(reclamacao);
+    }
+    
     Reclamacao getById(Long id);
-    List<Reclamacao> getByUsuario(Long id);
-    List<Reclamacao> getReclamacoesByStatus(StatusReclamacoes status);
-    List<Reclamacao> getByCategoria(String categoria);
     
-    @Query(value = "select * from reclamacoes join enderecos on reclamacoes.endereco = ")
-    List<Reclamacao> getByBairro(String bairro);
+    @Query("select r from reclamacoes where r.usuario_id = :userId")
+    List<Reclamacao> getByUsuario(@Param("userId") Long id);
     
+    @Query("select r from reclamacoes where r.status = :status")
+    List<Reclamacao> getReclamacoesByStatus(@Param("status") StatusReclamacoes status);
+    
+    @Query("select r from reclamacoes where r.categoria = :categoria")
+    List<Reclamacao> getByCategoria(@Param("categoria") String categoria);
+    
+    @Query(value = "select * from reclamacoes join enderecos on reclamacoes.endereco_id = enderecos.id where enderecos.bairro = :bairro", nativeQuery = true)
+    List<Reclamacao> getByBairro(@Param("bairro") String bairro);
     
     @Query("select r from reclamacoes where r.data between :inicio and :final")
     List<Reclamacao> getByPeriodo(@Param("inicio") LocalDateTime periodoInicial, @Param("final") LocalDateTime periodoFinal);
     
     @Query(value = "select * from reclamacoes", nativeQuery = true)
     List<Reclamacao> getReclamacoes();
-    
-    
-    List<Comentario> getAllComentarios(Reclamacao reclamacao);
 }
