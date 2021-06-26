@@ -9,8 +9,8 @@ import com.grupofds.projetoTF.negocio.entidades.Comentario;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 
 public interface IRepositorioComentarios {
-    Comentario addComentario(Long usuarioId, Long idReclamacao, String mensagem, String imagem, StatusReclamacoes status);
-    Comentario editComentario(Long idComentario, String mensagem , String imagem, StatusReclamacoes status);
+    Comentario addComentario(Comentario comentario);
+    Comentario editComentario(Comentario comentario);
     boolean deleteComentario(Long idComentario);
     Comentario getById(Long id);
     List<Comentario> getByReclamacao(Long idReclamacao);

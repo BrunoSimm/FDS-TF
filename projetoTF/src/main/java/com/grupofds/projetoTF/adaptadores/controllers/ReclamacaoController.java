@@ -18,6 +18,7 @@ import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamaco
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamacoesByUsuarioUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.CriaReclamacaoUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.EncerraReclamacaoUC;
+import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ListaTodasReclamacoes;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 
 @RestController
@@ -31,6 +32,7 @@ public class ReclamacaoController {
 	private ConsultaReclamacoesByUsuarioUC consultaReclamacoesByUsuarioUC;
 	private CriaReclamacaoUC criaReclamacaoUC;
 	private EncerraReclamacaoUC encerraReclamacaoUC;
+	private ListaTodasReclamacoes listaTodasReclamacoesUC;
 	
 	@Autowired
 	public ReclamacaoController(AtualizaReclamacaoUC atualizaReclamacaoUC,
@@ -38,7 +40,7 @@ public class ReclamacaoController {
 			ConsultaReclamacoesByBairroUC consultaReclamacoesByBairroUC,
 			ConsultaReclamacoesByCategoriaUC consultaReclamacoesByCategoriaUC,
 			ConsultaReclamacoesByUsuarioUC consultaReclamacoesByUsuarioUC, CriaReclamacaoUC criaReclamacaoUC,
-			EncerraReclamacaoUC encerraReclamacaoUC) {
+			EncerraReclamacaoUC encerraReclamacaoUC, ListaTodasReclamacoes listaTodasReclamacoesUC) {
 		this.atualizaReclamacaoUC = atualizaReclamacaoUC;
 		this.consultaReclamacaoByIdUC = consultaReclamacaoByIdUC;
 		this.consultaReclamacoesByBairroUC = consultaReclamacoesByBairroUC;
@@ -46,6 +48,7 @@ public class ReclamacaoController {
 		this.consultaReclamacoesByUsuarioUC = consultaReclamacoesByUsuarioUC;
 		this.criaReclamacaoUC = criaReclamacaoUC;
 		this.encerraReclamacaoUC = encerraReclamacaoUC;
+		this.listaTodasReclamacoesUC = listaTodasReclamacoesUC;
 	}
 
 	@PutMapping(value = "/id/{idReclamacao}")
@@ -81,6 +84,11 @@ public class ReclamacaoController {
 	@PostMapping(value = "/id/{idReclamacao}")
 	public Reclamacao encerraReclamacao(@PathVariable Long idReclamacao, @RequestBody Long idUsuarioOficial) {
 		return encerraReclamacaoUC.run(idUsuarioOficial, idReclamacao);
+	}
+	
+	@GetMapping
+	public List<Reclamacao> findAll(){
+		return listaTodasReclamacoesUC.run();
 	}
 	
 }

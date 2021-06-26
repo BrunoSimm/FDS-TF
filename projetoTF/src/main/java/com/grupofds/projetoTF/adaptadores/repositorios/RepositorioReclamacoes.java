@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.grupofds.projetoTF.negocio.entidades.Comentario;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
@@ -26,19 +25,19 @@ public interface RepositorioReclamacoes extends IRepositorioReclamacoes, JpaRepo
     
     Reclamacao getById(Long id);
     
-    @Query("select r from reclamacoes where r.usuario_id = :userId")
+    @Query(value = "select * from reclamacoes where reclamacoes.usuario_id = :userId", nativeQuery = true)
     List<Reclamacao> getByUsuario(@Param("userId") Long id);
     
-    @Query("select r from reclamacoes where r.status = :status")
+    @Query(value = "select * from reclamacoes where reclamacoes.status = :status", nativeQuery = true)
     List<Reclamacao> getReclamacoesByStatus(@Param("status") StatusReclamacoes status);
     
-    @Query("select r from reclamacoes where r.categoria = :categoria")
+    @Query(value = "select * from reclamacoes where reclamacoes.categoria = :categoria", nativeQuery = true)
     List<Reclamacao> getByCategoria(@Param("categoria") String categoria);
     
     @Query(value = "select * from reclamacoes join enderecos on reclamacoes.endereco_id = enderecos.id where enderecos.bairro = :bairro", nativeQuery = true)
     List<Reclamacao> getByBairro(@Param("bairro") String bairro);
     
-    @Query("select r from reclamacoes where r.data between :inicio and :final")
+    @Query(value = "select * from reclamacoes where reclamacoes.data BETWEEN :inicio AND :final ", nativeQuery = true)
     List<Reclamacao> getByPeriodo(@Param("inicio") LocalDateTime periodoInicial, @Param("final") LocalDateTime periodoFinal);
     
     @Query(value = "select * from reclamacoes", nativeQuery = true)

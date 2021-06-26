@@ -80,4 +80,8 @@ public class ReclamacaoServico {
     public List<Reclamacao> getReclamacoesByBairro(String bairro) {
         return repositorioReclamacoes.getByBairro(bairro);
     }
+
+	public List<Reclamacao> getReclamacoes() {
+		return repositorioReclamacoes.getReclamacoes();
+	}
 }

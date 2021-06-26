@@ -52,6 +52,15 @@ public class Comentario {
 		this.reclamacao = reclamacao;
 	}
 	
+	public Comentario(Usuario usuario, @NotBlank(message = "Descrição deve sere preenchida.") String descricao,
+			LocalDateTime data, String imagem, Reclamacao reclamacao) {
+		this.usuario = usuario;
+		this.descricao = descricao;
+		this.data = data;
+		this.imagem = imagem;
+		this.reclamacao = reclamacao;
+	}
+	
 	public Reclamacao getReclamacao() {
 		return reclamacao;
 	}
