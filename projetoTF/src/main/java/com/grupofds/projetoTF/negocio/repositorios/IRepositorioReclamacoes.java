@@ -9,16 +9,15 @@ import com.grupofds.projetoTF.negocio.entidades.Comentario;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 
-@Component
 public interface IRepositorioReclamacoes {
-    public Reclamacao createReclamacao(Reclamacao reclamacao);
-    public Reclamacao updateReclamacao(Reclamacao reclamacao);
-    public Reclamacao getById(Long id);
-    public List<Reclamacao> getByUsuario(Long id);
+    Reclamacao createReclamacao(Reclamacao reclamacao);
+    Reclamacao updateReclamacao(Reclamacao reclamacao);
+    Reclamacao getById(Long id);
+    List<Reclamacao> getByUsuario(Long id);
     List<Reclamacao> getReclamacoesByStatus(StatusReclamacoes status);
-    public List<Reclamacao> getByCategoria(String categoria);
-    public List<Reclamacao> getByBairro(String bairro);
-    public List<Reclamacao> getByPeriodo(LocalDateTime periodoInicial, LocalDateTime periodoFinal);
-    public List<Reclamacao> getReclamacoes();
+    List<Reclamacao> getByCategoria(String categoria);
+    List<Reclamacao> getByBairro(String bairro);
+    List<Reclamacao> getByPeriodo(LocalDateTime periodoInicial, LocalDateTime periodoFinal);
+    List<Reclamacao> getReclamacoes();
     List<Comentario> getAllComentarios(Reclamacao reclamacao);
 }

@@ -12,7 +12,7 @@ public class CriaReclamacaoUC {
 	@Autowired
 	private ReclamacaoServico reclamacaoServico;
 	
-	public void run(Reclamacao reclamacao) {
-		reclamacaoServico.createReclamacao(reclamacao);
+	public Reclamacao run(Reclamacao reclamacao) {
+		return reclamacaoServico.createReclamacao(reclamacao);
 	}
 }
