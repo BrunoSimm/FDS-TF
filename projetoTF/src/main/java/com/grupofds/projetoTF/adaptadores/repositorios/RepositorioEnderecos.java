@@ -22,6 +22,6 @@ public interface RepositorioEnderecos extends IRepositorioEnderecos, JpaReposito
     Endereco getById(Long id);
     
     @Query(value = "select * from enderecos where enderecos.reclamacao_id = :reclamacaoId", nativeQuery = true)
-    Endereco getByReclamacaoId(@Param("userId") Long id);
+    Endereco getByReclamacaoId(@Param("reclamacaoId") Long id);
 
 }

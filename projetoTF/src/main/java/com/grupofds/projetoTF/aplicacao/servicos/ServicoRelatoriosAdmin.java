@@ -65,7 +65,6 @@ public class ServicoRelatoriosAdmin {
 
     public double getNumeroMedioComentariosByPeriodo(Long usuarioId, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
         this.validaUsuarioAdmin(usuarioId);
-        //TODO: a media eh sobre reclamacoes???
         List<Comentario> aux = repositorioComentarios.getByPeriodo(periodoInicial, periodoFinal);
         int totalComentarios = aux.size();
         int totalReclamacoes = aux.stream()
@@ -155,7 +154,6 @@ public class ServicoRelatoriosAdmin {
 
     private void validaUsuarioAdmin(Long usuarioId) {
         if (repositorioUsuarios.getById(usuarioId).getCategoriaDeUsuario() != CategoriaDeUsuario.ADMINISTRADOR) {
-            // TODO: decidir sobre excecoes
             throw new IllegalArgumentException("Usuario sem permissao de acesso a funcao.");
         }
     }
