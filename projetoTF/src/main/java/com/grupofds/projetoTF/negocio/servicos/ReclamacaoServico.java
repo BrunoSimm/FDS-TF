@@ -40,6 +40,8 @@ public class ReclamacaoServico {
     }
 
     public Reclamacao createReclamacao(Reclamacao reclamacao) {
+    	reclamacao.setData(LocalDateTime.now());
+    	reclamacao.setStatus(StatusReclamacoes.ABERTA);
         return repositorioReclamacoes.createReclamacao(reclamacao);
     }
 
