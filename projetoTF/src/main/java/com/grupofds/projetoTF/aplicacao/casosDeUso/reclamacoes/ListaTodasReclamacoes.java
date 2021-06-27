@@ -9,12 +9,11 @@ import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.servicos.ReclamacaoServico;
 
 @Component
-public class ConsultaReclamacoesByBairroUC {
-	
+public class ListaTodasReclamacoes {
 	@Autowired
 	private ReclamacaoServico reclamacaoServico;
 	
-	public List<Reclamacao> run(String bairro) {
-		return this.reclamacaoServico.getReclamacoesByBairro(bairro);
+	public List<Reclamacao> run() {
+		return this.reclamacaoServico.getReclamacoes();
 	}
 }

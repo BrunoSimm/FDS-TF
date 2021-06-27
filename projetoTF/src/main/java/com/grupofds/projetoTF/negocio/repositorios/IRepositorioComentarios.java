@@ -8,14 +8,13 @@ import org.springframework.stereotype.Component;
 import com.grupofds.projetoTF.negocio.entidades.Comentario;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 
-@Component
 public interface IRepositorioComentarios {
-    public Comentario addComentario(Long usuarioId, Long idReclamacao, String mensagem, String imagem, StatusReclamacoes status);
-    public Comentario editComentario(Long idComentario, String mensagem , String imagem, StatusReclamacoes status);
-    public boolean deleteComentario(Long idComentario);
-    public Comentario getById(Long id);
-    public List<Comentario> getByReclamacao(Long idReclamacao);
-    public List<Comentario> getByUsuario(Long idUsuario);
-    public List<Comentario> getByStatus(StatusReclamacoes status);
-    public List<Comentario> getByPeriodo(LocalDateTime periodoInicial, LocalDateTime periodoFinal);
+    Comentario addComentario(Comentario comentario);
+    Comentario editComentario(Comentario comentario);
+    boolean deleteComentario(Long idComentario);
+    Comentario getById(Long id);
+    List<Comentario> getByReclamacao(Long idReclamacao);
+    List<Comentario> getByUsuario(Long idUsuario);
+    List<Comentario> getByStatus(StatusReclamacoes status);
+    List<Comentario> getByPeriodo(LocalDateTime periodoInicial, LocalDateTime periodoFinal);
 }

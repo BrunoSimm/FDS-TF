@@ -9,11 +9,15 @@ import com.grupofds.projetoTF.negocio.servicos.ReclamacaoServico;
 @Component
 public class AtualizaReclamacaoUC {
 
-	@Autowired
 	private ReclamacaoServico reclamacaoServico;
 	
-	public void run(Long usuarioId, Long reclamacaoId, Reclamacao novosDadosReclamacao) {
-		this.reclamacaoServico.updateReclamacao(usuarioId, reclamacaoId, novosDadosReclamacao);
+	@Autowired
+	public AtualizaReclamacaoUC(ReclamacaoServico reclamacaoServico) {
+		this.reclamacaoServico = reclamacaoServico;
+	}
+
+	public Reclamacao run(Long usuarioId, Long reclamacaoId, Reclamacao novosDadosReclamacao) {
+		return this.reclamacaoServico.updateReclamacao(usuarioId, reclamacaoId, novosDadosReclamacao);
 	}
 	
 }

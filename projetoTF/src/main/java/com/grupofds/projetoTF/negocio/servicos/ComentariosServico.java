@@ -1,11 +1,15 @@
 package com.grupofds.projetoTF.negocio.servicos;
 
 import com.grupofds.projetoTF.negocio.entidades.Comentario;
+import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 import com.grupofds.projetoTF.negocio.entidades.usuarios.CategoriaDeUsuario;
+import com.grupofds.projetoTF.negocio.entidades.usuarios.Usuario;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioComentarios;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioUsuarios;
+
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,30 +30,55 @@ public class ComentariosServico {
 
 	public Comentario addComentario(Long usuarioId, Long idReclamacao, String mensagem, String imagem, StatusReclamacoes status) {
         this.validaUsuario(usuarioId);
-        if (repositorioReclamacoes.getById(idReclamacao).getStatus() == StatusReclamacoes.ENCERRADA) {
+        
+        Reclamacao reclamacao = repositorioReclamacoes.getById(idReclamacao);
+        
+        if (reclamacao.getStatus() == StatusReclamacoes.ENCERRADA) {
             throw new IllegalArgumentException("Impossivel adicionar Comentario. Reclamacao com status ENCERRADA.");
         }
+        
+        Usuario usuario = repositorioUsuarios.getById(usuarioId);
+        
         if (status == StatusReclamacoes.ENCERRADA
-                && repositorioUsuarios.getById(usuarioId).getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
+                && usuario.getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
             throw new IllegalArgumentException("Usuario sem permissao para encerrar a Reclamacao.");
         }
-        return this.repositorioComentarios.addComentario(usuarioId, idReclamacao, mensagem, imagem, status);
+        
+        Comentario comentario = new Comentario(usuario, mensagem, LocalDateTime.now(), imagem, reclamacao);
+        
+        return this.repositorioComentarios.addComentario(comentario);
     }
 
     public Comentario editComentario(Long usuarioId, Long idComentario, String mensagem, String imagem, StatusReclamacoes status) {
         this.validaUsuario(usuarioId);
-        if (!repositorioUsuarios.getById(usuarioId).equals(repositorioComentarios.getById(idComentario).getUsuario())) {
+        
+        Comentario comentario = repositorioComentarios.getById(idComentario);
+        Usuario usuario = repositorioUsuarios.getById(usuarioId);
+        
+        if (!usuario.equals(comentario.getUsuario())) {
             throw new IllegalArgumentException("Usuario sem permissao para alterar o Comentario.");
         }
-        if (repositorioUsuarios.getById(usuarioId).getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
-            if (repositorioComentarios.getById(idComentario).getReclamacao().getStatus() == StatusReclamacoes.ENCERRADA) {
+        
+        Reclamacao reclamacao = repositorioReclamacoes.getById(comentario.getReclamacao().getId());
+        
+        if (usuario.getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
+            if (reclamacao.getStatus() == StatusReclamacoes.ENCERRADA) {
                 throw new IllegalArgumentException("Impossivel alterar Comentario. Reclamacao com status ENCERRADA.");
             }
             if (status == StatusReclamacoes.ENCERRADA) {
                 throw new IllegalArgumentException("Usuario sem permissao para encerrar a Reclamacao.");
             }
         }
-        return this.repositorioComentarios.editComentario(idComentario, mensagem, imagem, status);
+        
+        comentario.setDescricao(mensagem);
+        comentario.setImagem(imagem);
+        comentario.setData(LocalDateTime.now());
+        
+        comentario.getReclamacao().setStatus(status);
+        this.repositorioReclamacoes.updateReclamacao(reclamacao); //Atualizando status da reclamacação.
+        
+        //Atualizando comentario.
+        return this.repositorioComentarios.editComentario(comentario);
     }
 
     public boolean deleteComentario(Long usuarioId, Long idComentario) {
