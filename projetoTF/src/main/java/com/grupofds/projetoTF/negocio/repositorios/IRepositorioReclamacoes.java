@@ -3,7 +3,6 @@ package com.grupofds.projetoTF.negocio.repositorios;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.grupofds.projetoTF.negocio.entidades.Endereco;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 
