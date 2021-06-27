@@ -1,0 +1,10 @@
+### VS Code ###
+.vscode/
+/.metadata/
+workspace.code-workspace
+
+# Log file
+*.log
+
+# Astah Lock File
+*.lock

@@ -31,7 +31,7 @@ public class ServicoRelatoriosAdmin {
     }
 
     public Long getTotalReclamacoesByCategoriaAndPeriodo(Long usuarioId, String categoria, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
-        this.validaUsuario(usuarioId);
+        this.validaUsuarioAdmin(usuarioId);
         return repositorioReclamacoes.getByCategoria(categoria).stream()
             //.filter(r -> !r.getData().isBefore(periodoInicial) && !r.getData().isAfter(periodoFinal)) => LOGICA PARA A FUNÇÃO DE REPOSITORIO
             .filter(repositorioReclamacoes.getByPeriodo(periodoInicial, periodoFinal)::contains)
@@ -39,14 +39,14 @@ public class ServicoRelatoriosAdmin {
     }
 
     public Long getTotalReclamacoesByBairroAndPeriodo(Long usuarioId, String bairro, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
-        this.validaUsuario(usuarioId);
+        this.validaUsuarioAdmin(usuarioId);
         return repositorioReclamacoes.getByBairro(bairro).stream()
             .filter(repositorioReclamacoes.getByPeriodo(periodoInicial, periodoFinal)::contains)
             .count();
     }
 
     public double getNumeroMedioComentariosByCategoria(Long usuarioId, String categoria) {
-        this.validaUsuario(usuarioId);
+        this.validaUsuarioAdmin(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getByCategoria(categoria);
         int totalReclamacoes = aux.size();
         int totalComentarios = aux.stream()
@@ -55,7 +55,7 @@ public class ServicoRelatoriosAdmin {
     }
 
     public double getNumeroMedioComentariosByBairro(Long usuarioId, String bairro) {
-        this.validaUsuario(usuarioId);
+        this.validaUsuarioAdmin(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getByBairro(bairro);
         int totalReclamacoes = aux.size();
         int totalComentarios = aux.stream()
@@ -64,7 +64,7 @@ public class ServicoRelatoriosAdmin {
     }
 
     public double getNumeroMedioComentariosByPeriodo(Long usuarioId, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
-        this.validaUsuario(usuarioId);
+        this.validaUsuarioAdmin(usuarioId);
         //TODO: a media eh sobre reclamacoes???
         List<Comentario> aux = repositorioComentarios.getByPeriodo(periodoInicial, periodoFinal);
         int totalComentarios = aux.size();
@@ -76,7 +76,7 @@ public class ServicoRelatoriosAdmin {
     }
 
     public double getPercentualResolvidoByCategoria(Long usuarioId, String categoria) {
-        this.validaUsuario(usuarioId);
+        this.validaUsuarioAdmin(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getByCategoria(categoria);
         int totalReclamacoes = aux.size();
         int totalReclamacoesResolvidas = (int) aux.stream()
@@ -86,7 +86,7 @@ public class ServicoRelatoriosAdmin {
     }
     
     public double getPercentualResolvidoByBairro(Long usuarioId, String bairro) {
-        this.validaUsuario(usuarioId);
+        this.validaUsuarioAdmin(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getByBairro(bairro);
         int totalReclamacoes = aux.size();
         int totalReclamacoesResolvidas = (int) aux.stream()
@@ -96,7 +96,7 @@ public class ServicoRelatoriosAdmin {
     }
 
     public double getPercentualEncerradoByCategoria(Long usuarioId, String categoria) {
-        this.validaUsuario(usuarioId);
+        this.validaUsuarioAdmin(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getByCategoria(categoria);
         int totalReclamacoes = aux.size();
         int totalReclamacoesEncerradas = (int) aux.stream()
@@ -106,7 +106,7 @@ public class ServicoRelatoriosAdmin {
     }
 
     public double getPercentualEncerradoByBairro(Long usuarioId, String bairro) {
-        this.validaUsuario(usuarioId);
+        this.validaUsuarioAdmin(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getByBairro(bairro);
         int totalReclamacoes = aux.size();
         int totalReclamacoesEncerradas = (int) aux.stream()
@@ -116,7 +116,7 @@ public class ServicoRelatoriosAdmin {
     }
 
     public double getPercentualRespondidoByUsersOficiais(Long usuarioId) {
-        this.validaUsuario(usuarioId);
+        this.validaUsuarioAdmin(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
         int totalReclamacoes = aux.size();
         int totalReclamacoesRespondidas = (int) aux.stream()
@@ -127,25 +127,24 @@ public class ServicoRelatoriosAdmin {
     }
     
     public double getPercentualRespondidoByUserOficial(Long usuarioId, Long usuarioOficialId) {
-    	
-    	this.validaUsuario(usuarioId);
-    	
+    	this.validaUsuarioAdmin(usuarioId);
     	Usuario userOficial = repositorioUsuarios.getById(usuarioOficialId);
-    	
     	if (userOficial == null) {
-    		throw new IllegalArgumentException("Usuario sem permissao de acesso a funcao.");
+    		throw new IllegalArgumentException("Usuario Oficial nao encontrado.");
     	}
-    		
-	        List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
-	        int totalReclamacoes = aux.size();
-	        int totalReclamacoesRespondidas = (int) aux.stream()
-	            .filter(r -> r.getComentarios().stream().anyMatch(c -> c.getUsuario().equals(userOficial)))
-	            .count();
-	        return (double) (totalReclamacoesRespondidas / totalReclamacoes);
+    	if (userOficial.getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
+    		throw new IllegalArgumentException("Usuario informado nao corresponde a um Usuario Oficial.");
+    	}
+        List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
+        int totalReclamacoes = aux.size();
+        int totalReclamacoesRespondidas = (int) aux.stream()
+            .filter(r -> r.getComentarios().stream().anyMatch(c -> c.getUsuario().equals(userOficial)))
+            .count();
+        return (double) (totalReclamacoesRespondidas / totalReclamacoes);
     	}
 
-    public double getPercentualEncerradasByUserOficial(Long usuarioId) {
-        this.validaUsuario(usuarioId);
+    public double getPercentualEncerradas(Long usuarioId) {
+        this.validaUsuarioAdmin(usuarioId);
         List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
         int totalReclamacoes = aux.size();
         int totalReclamacoesEncerradas = (int) aux.stream()
@@ -155,7 +154,7 @@ public class ServicoRelatoriosAdmin {
 
     }
 
-    private void validaUsuario(Long usuarioId) {
+    private void validaUsuarioAdmin(Long usuarioId) {
         if (repositorioUsuarios.getById(usuarioId).getCategoriaDeUsuario() != CategoriaDeUsuario.ADMINISTRADOR) {
             // TODO: decidir sobre excecoes
             throw new IllegalArgumentException("Usuario sem permissao de acesso a funcao.");
