@@ -79,7 +79,8 @@ public class ReclamacaoController {
 	
 	@PostMapping
 	public Reclamacao criaReclamacao(@RequestBody Reclamacao reclamacao) {
-		System.out.println(reclamacao);
+		System.out.println(reclamacao.toString());
+		System.out.println(reclamacao.getEndereco().toString());
 		return criaReclamacaoUC.run(reclamacao);
 	}
 	

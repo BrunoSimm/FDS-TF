@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,7 +21,7 @@ public class Usuario {
     private Long id;
     
     @Column(nullable = false)
-    @NotNull(message = "Nome inválido")
+    @NotBlank(message = "Nome inválido")
     private String nome;
     
     @Column(nullable = false)
@@ -35,7 +36,6 @@ public class Usuario {
 	public Usuario(Long id, @NotNull(message = "Nome inválido") String nome,
 			@Email(message = "E-mail inválido") String email,
 			@NotNull(message = "Categoria inválida") CategoriaDeUsuario categoriaDeUsuario) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -43,9 +43,9 @@ public class Usuario {
 	}
 	
 	public CategoriaDeUsuario getCategoriaDeUsuario() {
-        return categoriaDeUsuario;
+		return categoriaDeUsuario;
 	}
-
+	
 	public void setCategoriaDeUsuario(CategoriaDeUsuario categoriaDeUsuario) {
         this.categoriaDeUsuario = categoriaDeUsuario;
 	}

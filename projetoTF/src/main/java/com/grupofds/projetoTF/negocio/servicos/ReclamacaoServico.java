@@ -32,7 +32,7 @@ public class ReclamacaoServico {
     		if ((reclamacao == null)) {
     			throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id válido."); //TODO -> ReclamacaoNotFoundException
     		} else {
-    			if (user.getId() == reclamacao.getUsuario().getId()) {
+    			if (user.getId() == reclamacao.getUsuario_id().getId()) {
     				return repositorioReclamacoes.updateReclamacao(novosDadosReclamacao);
     			} else throw new IllegalArgumentException("Usuário de Id" + user.getId() +"não possui permissão para atualizar esta Reclamação.");
     		}

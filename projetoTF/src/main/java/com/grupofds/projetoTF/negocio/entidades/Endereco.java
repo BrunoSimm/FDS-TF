@@ -115,7 +115,11 @@ public class Endereco {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Endereco [id=" + id + ", bairro=" + bairro + ", logradouro=" + logradouro + ", numero=" + numero
+				+ ", cidade=" + cidade + ", estado=" + estado + ", reclamacao=" + reclamacao + "]";
+	}
 	
 }

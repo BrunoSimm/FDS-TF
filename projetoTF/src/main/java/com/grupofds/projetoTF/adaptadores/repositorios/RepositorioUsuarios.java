@@ -13,9 +13,11 @@ import com.grupofds.projetoTF.negocio.entidades.usuarios.Usuario;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioUsuarios;
 
 @Repository
-@SQLInsert(sql = "INSERT INTO usuarios (nome, email, categoria_de_usuario) VALUES ('BRUNO','TESTE@EMAIL.COM','ADMINISTRADOR')")
 public interface RepositorioUsuarios extends JpaRepository<Usuario, Long>, IRepositorioUsuarios {
+	
 	Usuario getById(Long id);
+	
+	Usuario getById(int id);
 	
 	@Query(value = "select * from usuarios where usuarios.categoria_de_usuario = :categoria", nativeQuery = true)
     List<Usuario> getUsuariosByCategoria(@Param("categoria") CategoriaDeUsuario categoriaDeUsuario);

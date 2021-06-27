@@ -16,7 +16,7 @@ import com.grupofds.projetoTF.negocio.repositorios.IRepositorioComentarios;
 
 @Repository
 public interface RepositorioComentarios extends IRepositorioComentarios, JpaRepository<Comentario,Long> {
-	
+		
 	 	default Comentario addComentario(Comentario comentario) {
 	 		return this.save(comentario);
 	 	}
