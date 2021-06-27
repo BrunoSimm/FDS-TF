@@ -57,7 +57,7 @@ public class Reclamacao {
 	private String categoria;
 	
 	@Column
-	@NotBlank(message = "O status deve ser definido como ABERTA, RESOLVIDA ou ENCERRADA")
+	//@NotBlank(message = "O status deve ser definido como ABERTA, RESOLVIDA ou ENCERRADA")
 	@Enumerated(EnumType.STRING)
 	private StatusReclamacoes status;
 	

@@ -30,7 +30,7 @@ public class Endereco {
 	
 	@Column(nullable = true)
 	@Positive(message = "Numero deve ser positivo.")
-	private String numero;
+	private int numero;
 	
 	@Column
 	@NotBlank(message = "Cidade deve ser preenchido.")
@@ -46,7 +46,7 @@ public class Endereco {
 
 	public Endereco(Long id, @NotBlank(message = "Bairro deve ser preenchido.") String bairro,
 			@NotBlank(message = "Logradouro deve ser preenchido.") String logradouro,
-			@Positive(message = "Numero deve ser positivo.") String numero,
+			@Positive(message = "Numero deve ser positivo.") int numero,
 			@NotBlank(message = "Cidade deve ser preenchido.") String cidade,
 			@NotBlank(message = "Estado deve ser preenchido.") String estado, Reclamacao reclamacao) {
 		this.id = id;
@@ -67,8 +67,6 @@ public class Endereco {
 	public void setReclamacao(Reclamacao reclamacao) {
 		this.reclamacao = reclamacao;
 	}
-
-
 
 	public Long getId() {
 		return id;
@@ -94,11 +92,11 @@ public class Endereco {
 		this.logradouro = logradouro;
 	}
 
-	public String getNumero() {
+	public int getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(int numero) {
 		this.numero = numero;
 	}
 
