@@ -29,7 +29,8 @@ public class Reclamacao {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
-	private Usuario usuario;
+	@NotBlank(message = "usuario_id deve ser preenchido")
+	private Usuario usuario_id;
 	
 	@Column
 	@NotBlank(message = "Titulo deve ser preenchido.")
@@ -40,16 +41,13 @@ public class Reclamacao {
 	private String descricao;
 	
 	@Column
-	@NotBlank(message = "Data deve ser preenchida.")
 	private LocalDateTime data;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "endereco_id", referencedColumnName = "id")
-	@NotBlank(message = "Endereço deve ser preenchido.")
+	@JoinColumn(name = "endereco_id", referencedColumnName = "id", nullable = true)
 	private Endereco endereco;
 	
 	@Column
-	@NotBlank
 	private String imagem;
 	
 	@Column
@@ -57,22 +55,19 @@ public class Reclamacao {
 	private String categoria;
 	
 	@Column
-	//@NotBlank(message = "O status deve ser definido como ABERTA, RESOLVIDA ou ENCERRADA")
 	@Enumerated(EnumType.STRING)
 	private StatusReclamacoes status;
 	
 	@OneToMany(mappedBy = "reclamacao")
 	private List<Comentario> comentarios;
 	
-	public Reclamacao(Long id, Usuario usuario, @NotBlank(message = "Titulo deve ser preenchido.") String titulo,
-			@NotBlank(message = "Descrição deve ser preenchido.") String descricao,
-			@NotBlank(message = "Data deve ser preenchida.") LocalDateTime data,
-			@NotBlank(message = "Endereço deve ser preenchido.") Endereco endereco, @NotBlank String imagem,
-			@NotBlank(message = "Categoria deve ser preenchida.") String categoria,
-			@NotBlank(message = "O status deve ser definido como ABERTA, RESOLVIDA ou ENCERRADA") StatusReclamacoes status,
-			List<Comentario> comentarios) {
+	public Reclamacao(Long id, @NotBlank(message = "usuario_id deve ser preenchido") Usuario usuario_id,
+			@NotBlank(message = "Titulo deve ser preenchido.") String titulo,
+			@NotBlank(message = "Descrição deve ser preenchido.") String descricao, LocalDateTime data,
+			Endereco endereco, String imagem, @NotBlank(message = "Categoria deve ser preenchida.") String categoria,
+			StatusReclamacoes status, List<Comentario> comentarios) {
 		this.id = id;
-		this.usuario = usuario;
+		this.usuario_id = usuario_id;
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.data = data;
@@ -83,12 +78,12 @@ public class Reclamacao {
 		this.comentarios = comentarios;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Usuario getUsuario_id() {
+		return usuario_id;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuario_id(Usuario usuario_id) {
+		this.usuario_id = usuario_id;
 	}
 
 	public Long getId() {
@@ -145,6 +140,12 @@ public class Reclamacao {
 	public void setComentarios(List<Comentario> comentarios) {
 		this.comentarios = comentarios;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Reclamacao [id=" + id + ", usuario=" + usuario_id + ", titulo=" + titulo + ", descricao=" + descricao
+				+ ", data=" + data + ", endereco=" + endereco + ", imagem=" + imagem + ", categoria=" + categoria
+				+ ", status=" + status + ", comentarios=" + comentarios + "]";
+	}
 	
 }
