@@ -123,7 +123,6 @@ public class ServicoRelatoriosAdmin {
             .filter(r -> r.getComentarios().stream().anyMatch(c -> c.getUsuario().getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL))
             .count();
         return (double) (totalReclamacoesRespondidas / totalReclamacoes);
-
     }
     
     public double getPercentualRespondidoByUserOficial(Long usuarioId, Long usuarioOficialId) {
@@ -141,7 +140,7 @@ public class ServicoRelatoriosAdmin {
             .filter(r -> r.getComentarios().stream().anyMatch(c -> c.getUsuario().equals(userOficial)))
             .count();
         return (double) (totalReclamacoesRespondidas / totalReclamacoes);
-    	}
+    }
 
     public double getPercentualEncerradas(Long usuarioId) {
         this.validaUsuarioAdmin(usuarioId);
