@@ -53,7 +53,7 @@ public class ReclamacaoController {
 	}
 
 	@PutMapping(value = "/id/{idReclamacao}")
-	public Reclamacao atualizaReclamacao(@PathVariable Long idReclamacao, @RequestBody Long idUsuario  ,@RequestBody Reclamacao reclamacao) { // TODO => Fazer DTO para Reclamacao??
+	public Reclamacao atualizaReclamacao(@PathVariable Long idReclamacao, @RequestBody Long idUsuario, @RequestBody Reclamacao reclamacao) { // TODO => Fazer DTO para Reclamacao??
 		return atualizaReclamacaoUC.run(idUsuario, idReclamacao, reclamacao);
 	}
 	

@@ -34,7 +34,7 @@ public class ReclamacaoServico {
     		} else {
     			if (user.getId() == reclamacao.getUsuario_id().getId()) {
     				return repositorioReclamacoes.updateReclamacao(novosDadosReclamacao);
-    			} else throw new IllegalArgumentException("Usuário de Id" + user.getId() +"não possui permissão para atualizar esta reclamacação.");
+    			} else throw new IllegalArgumentException("Usuário de Id" + user.getId() +"não possui permissão para atualizar esta Reclamação.");
     		}
     	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido."); //TODO -> UserNotFoundException
     }

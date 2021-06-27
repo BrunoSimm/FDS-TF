@@ -43,15 +43,15 @@ public class Usuario {
 	}
 	
 	public CategoriaDeUsuario getCategoriaDeUsuario() {
-			return categoriaDeUsuario;
+		return categoriaDeUsuario;
 	}
 	
 	public void setCategoriaDeUsuario(CategoriaDeUsuario categoriaDeUsuario) {
-			this.categoriaDeUsuario = categoriaDeUsuario;
+        this.categoriaDeUsuario = categoriaDeUsuario;
 	}
 
 	public void setId(Long id) {
-			this.id = id;
+        this.id = id;
 	}
 
 	public Long getId() {
