@@ -19,6 +19,7 @@ import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamaco
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.CriaReclamacaoUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.EncerraReclamacaoUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ListaTodasReclamacoes;
+import com.grupofds.projetoTF.negocio.entidades.Endereco;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 
 @RestController
@@ -78,6 +79,7 @@ public class ReclamacaoController {
 	
 	@PostMapping
 	public Reclamacao criaReclamacao(@RequestBody Reclamacao reclamacao) {
+		System.out.println(reclamacao);
 		return criaReclamacaoUC.run(reclamacao);
 	}
 	
