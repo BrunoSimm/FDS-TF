@@ -1,6 +1,5 @@
 package com.grupofds.projetoTF.aplicacao.servicos;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -152,11 +151,7 @@ public class ServicoRelatoriosAdmin {
         int totalReclamacoesEncerradas = (int) aux.stream()
             .filter(r -> r.getStatus() == StatusReclamacoes.ENCERRADA)
             .count();
-<<<<<<< HEAD
         return 100f * totalReclamacoesEncerradas / totalReclamacoes;
-=======
-        return (100.0 * totalReclamacoesEncerradas / totalReclamacoes);
->>>>>>> e5044b70d6b3031eec14cd162a8e7d705811353b
     }
 
     private void validaUsuarioAdmin(Long usuarioId) {
