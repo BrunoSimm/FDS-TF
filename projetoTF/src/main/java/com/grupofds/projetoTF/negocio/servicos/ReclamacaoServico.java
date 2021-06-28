@@ -57,6 +57,7 @@ public class ReclamacaoServico {
 		}
 
 		Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
+		
 		if (reclamacao == null) {
 			throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id válido.");
 		}
@@ -88,7 +89,7 @@ public class ReclamacaoServico {
 		if (novaCategoria != null && !novaCategoria.isBlank() && !novaCategoria.isEmpty()) {
 			reclamacao.setCategoria(novaCategoria);
 		}
-
+		
 		return repositorioReclamacoes.updateReclamacao(reclamacao);
     }
 

@@ -54,37 +54,38 @@ public class ReclamacaoController {
 
 	@PutMapping(value = "/id/{idReclamacao}") // /id/3?idUsuario=11
 	public Reclamacao atualizaReclamacao(@PathVariable Long idReclamacao, @RequestParam Long idUsuario, @RequestBody EditarReclamacaoRequisicaoDTO reclamacao) {
-		return null;//atualizaReclamacaoUC.run(idUsuario, idReclamacao, reclamacao);
+		System.out.println(reclamacao);
+		return atualizaReclamacaoUC.run(idUsuario, idReclamacao, reclamacao);
 	}
 	
 	@GetMapping(value = "/id")
 	public Reclamacao consultaReclamacaoById(@RequestParam Long id) {
 		return consultaReclamacaoByIdUC.run(id);
-	}//ok
+	}
 	
 	@GetMapping(value = "/bairro")
 	public List<Reclamacao> consultaReclamacoesByBairro(@RequestParam String bairro){
 		return consultaReclamacoesByBairroUC.run(bairro);
-	}//ok
+	}
 	
 	@GetMapping(value = "/categoria")
 	public List<Reclamacao> consultaReclamacoesByCategoria(@RequestParam String categoria){
 		return consultaReclamacoesByCategoriaUC.run(categoria);
-	}//ok
+	}
 	
 	@GetMapping(value = "/usuario/{idUsuario}")
 	public List<Reclamacao> consultaReclamacoesByUsuario(@PathVariable Long idUsuario) {
 		return consultaReclamacoesByUsuarioUC.run(idUsuario);
-	}//Ok
+	}
 	
 	@PostMapping
 	public Reclamacao criaReclamacao(@RequestBody CriarReclamacaoRequisicaoDTO reclamacaoDTO) {
 		return criaReclamacaoUC.run(reclamacaoDTO);
-	}//Ok
+	}
 	
 	@GetMapping
 	public List<Reclamacao> findAll(){
 		return listaTodasReclamacoesUC.run();
-	}//Ok
+	}
 	
 }
