@@ -106,7 +106,7 @@ public class ReclamacaoServico {
     	List<Reclamacao> reclamacoes = repositorioReclamacoes.getByCategoria(categoria);
     	
     	reclamacoes.forEach(reclamacao -> {
-			reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+			reclamacao.setComentarios(repositorioComentarios.getByReclamacao(reclamacao.getId()));
 		});
     	
         return reclamacoes;
@@ -117,7 +117,7 @@ public class ReclamacaoServico {
     	List<Reclamacao> reclamacoes = repositorioReclamacoes.getByUsuario(idUsuario);
     	
     	reclamacoes.forEach(reclamacao -> {
-			reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+			reclamacao.setComentarios(repositorioComentarios.getByReclamacao(reclamacao.getId()));
 		});
     	
         return reclamacoes;
@@ -127,7 +127,7 @@ public class ReclamacaoServico {
     	List<Reclamacao> reclamacoes = repositorioReclamacoes.getByPeriodo(periodoInicial, periodoFinal);
     	
     	reclamacoes.forEach(reclamacao -> {
-			reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+			reclamacao.setComentarios(repositorioComentarios.getByReclamacao(reclamacao.getId()));
 		});
     	
         return reclamacoes;
@@ -138,7 +138,7 @@ public class ReclamacaoServico {
     	List<Reclamacao> reclamacoes = repositorioReclamacoes.getByBairro(bairro);
     	
     	reclamacoes.forEach(reclamacao -> {
-			reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+			reclamacao.setComentarios(repositorioComentarios.getByReclamacao(reclamacao.getId()));
 		});
     	
         return reclamacoes;
@@ -148,7 +148,7 @@ public class ReclamacaoServico {
 		List<Reclamacao> reclamacoes = repositorioReclamacoes.getReclamacoes();
     	
 		reclamacoes.forEach(reclamacao -> {
-			reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+			reclamacao.setComentarios(repositorioComentarios.getByReclamacao(reclamacao.getId()));
 		});
     	
         return reclamacoes;
