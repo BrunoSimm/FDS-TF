@@ -52,7 +52,7 @@ public class ServicoRelatoriosAdmin {
         int totalReclamacoes = aux.size();
         int totalComentarios = aux.stream()
             .reduce(0, (soma, reclamacao) -> soma + repositorioComentarios.getByReclamacao(reclamacao.getId()).size(), Integer::sum);
-        return (100.0 * totalComentarios / totalReclamacoes);
+        return (1.0 * totalComentarios / totalReclamacoes);
     }
 
     public double getNumeroMedioComentariosByBairro(Long usuarioId, String bairro) {
@@ -61,7 +61,7 @@ public class ServicoRelatoriosAdmin {
         int totalReclamacoes = aux.size();
         int totalComentarios = aux.stream()
             .reduce(0, (soma, reclamacao) -> soma + repositorioComentarios.getByReclamacao(reclamacao.getId()).size(), Integer::sum);
-        return (100.0 * totalComentarios / totalReclamacoes);
+        return (1.0 * totalComentarios / totalReclamacoes);
     }
 
     public double getNumeroMedioComentariosByPeriodo(Long usuarioId, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
@@ -72,7 +72,7 @@ public class ServicoRelatoriosAdmin {
             .map(Comentario::getReclamacaoId)
             .collect(Collectors.toSet())
             .size();
-        return (100.0 * totalComentarios / totalReclamacoes);
+        return (1.0 * totalComentarios / totalReclamacoes);
     }
 
     public double getPercentualResolvidoByCategoria(Long usuarioId, String categoria) {
@@ -151,7 +151,7 @@ public class ServicoRelatoriosAdmin {
         int totalReclamacoesEncerradas = (int) aux.stream()
             .filter(r -> r.getStatus() == StatusReclamacoes.ENCERRADA)
             .count();
-        return 100f * totalReclamacoesEncerradas / totalReclamacoes;
+        return (100.0 * totalReclamacoesEncerradas / totalReclamacoes);
     }
 
     private void validaUsuarioAdmin(Long usuarioId) {
