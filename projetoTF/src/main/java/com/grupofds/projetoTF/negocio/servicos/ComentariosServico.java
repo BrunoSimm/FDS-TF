@@ -81,7 +81,7 @@ public class ComentariosServico {
         return this.repositorioComentarios.editComentario(comentario);
     }
 
-    public boolean deleteComentario(Long usuarioId, Long idComentario) {
+/*     public boolean deleteComentario(Long usuarioId, Long idComentario) {
         this.validaUsuario(usuarioId);
         if (!repositorioUsuarios.getById(usuarioId).equals(repositorioComentarios.getById(idComentario).getUsuario())) {
             throw new IllegalArgumentException("Usuario sem permissao para apagar o Comentario.");
@@ -98,7 +98,7 @@ public class ComentariosServico {
         // repositorioReclamacoes.updateReclamacao(updatedR);
 
         return this.repositorioComentarios.deleteComentario(idComentario);
-    }
+    } */
 
     private void validaUsuario(Long usuarioId) {
         if (repositorioUsuarios.getById(usuarioId).getCategoriaDeUsuario() != CategoriaDeUsuario.CIDADAO
