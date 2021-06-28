@@ -12,7 +12,7 @@ public class ConsultaTotalReclamacoesByBairroUC {
 	@Autowired
 	private ServicoRelatoriosAdmin servicoRelatoriosAdmin;
 	
-	public void run(Long usuarioId,String bairro, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
-		this.servicoRelatoriosAdmin.getTotalReclamacoesByBairroAndPeriodo(usuarioId, bairro, periodoInicial, periodoFinal);
+	public Long run(Long usuarioId,String bairro, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
+		return this.servicoRelatoriosAdmin.getTotalReclamacoesByBairroAndPeriodo(usuarioId, bairro, periodoInicial, periodoFinal);
 	}
 }

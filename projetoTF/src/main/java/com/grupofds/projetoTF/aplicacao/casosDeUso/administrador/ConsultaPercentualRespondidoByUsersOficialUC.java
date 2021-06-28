@@ -11,8 +11,8 @@ public class ConsultaPercentualRespondidoByUsersOficialUC {
 	@Autowired
 	private ServicoRelatoriosAdmin servicoRelatoriosAdmin;
 	
-	public void run(Long usuarioId) {
-		this.servicoRelatoriosAdmin.getPercentualRespondidoByUsersOficiais(usuarioId);
+	public Double run(Long usuarioId) {
+		return this.servicoRelatoriosAdmin.getPercentualRespondidoByUsersOficiais(usuarioId);
 	}
 	
 }

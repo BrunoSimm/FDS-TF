@@ -12,7 +12,7 @@ public class ConsultaNumeroMedioComentariosByPeriodoUC {
 	@Autowired
 	private ServicoRelatoriosAdmin servicoRelatoriosAdmin;
 	
-	public void run(Long usuarioId, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
-		this.servicoRelatoriosAdmin.getNumeroMedioComentariosByPeriodo(usuarioId, periodoInicial, periodoFinal);
+	public Double run(Long usuarioId, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
+		return this.servicoRelatoriosAdmin.getNumeroMedioComentariosByPeriodo(usuarioId, periodoInicial, periodoFinal);
 	}
 }

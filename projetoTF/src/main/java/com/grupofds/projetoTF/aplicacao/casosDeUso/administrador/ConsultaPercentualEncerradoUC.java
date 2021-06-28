@@ -10,7 +10,7 @@ public class ConsultaPercentualEncerradoUC {
 	@Autowired
 	private ServicoRelatoriosAdmin servicoRelatoriosAdmin;
 	
-	public void run(Long usuarioId,String bairro) {
-		this.servicoRelatoriosAdmin.getPercentualEncerradas(usuarioId);
+	public Double run(Long usuarioId,String bairro) {
+		return this.servicoRelatoriosAdmin.getPercentualEncerradas(usuarioId);
 	}
 }

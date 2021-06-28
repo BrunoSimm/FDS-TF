@@ -3,6 +3,8 @@ package com.grupofds.projetoTF.aplicacao.servicos;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.grupofds.projetoTF.aplicacao.dtos.PercentualRespondidoByUserOficialDTO;
 import com.grupofds.projetoTF.negocio.entidades.Comentario;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
@@ -124,7 +126,7 @@ public class ServicoRelatoriosAdmin {
         return (double) (totalReclamacoesRespondidas / totalReclamacoes);
     }
     
-    public double getPercentualRespondidoByUserOficial(Long usuarioId, Long usuarioOficialId) {
+    public PercentualRespondidoByUserOficialDTO getPercentualRespondidoByUserOficial(Long usuarioId, Long usuarioOficialId) {
     	this.validaUsuarioAdmin(usuarioId);
     	Usuario userOficial = repositorioUsuarios.getById(usuarioOficialId);
     	if (userOficial == null) {
@@ -133,12 +135,14 @@ public class ServicoRelatoriosAdmin {
     	if (userOficial.getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
     		throw new IllegalArgumentException("Usuario informado nao corresponde a um Usuario Oficial.");
     	}
+        String nome = userOficial.getNome();
         List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
         int totalReclamacoes = aux.size();
         int totalReclamacoesRespondidas = (int) aux.stream()
             .filter(r -> r.getComentarios().stream().anyMatch(c -> c.getUsuario().equals(userOficial)))
             .count();
-        return (double) (totalReclamacoesRespondidas / totalReclamacoes);
+        Double percentualRespondido = (double) (totalReclamacoesRespondidas / totalReclamacoes);
+        return new PercentualRespondidoByUserOficialDTO(usuarioOficialId, nome, percentualRespondido);
     }
 
     public double getPercentualEncerradas(Long usuarioId) {
@@ -149,7 +153,6 @@ public class ServicoRelatoriosAdmin {
             .filter(r -> r.getStatus() == StatusReclamacoes.ENCERRADA)
             .count();
         return (double) (totalReclamacoesEncerradas / totalReclamacoes);
-
     }
 
     private void validaUsuarioAdmin(Long usuarioId) {
