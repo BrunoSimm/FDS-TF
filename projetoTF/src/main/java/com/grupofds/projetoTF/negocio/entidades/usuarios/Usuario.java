@@ -42,9 +42,7 @@ public class Usuario {
 		this.categoriaDeUsuario = categoriaDeUsuario;
 	}
 	
-	public Usuario() {
-		
-	}
+	public Usuario() {}
 
 	public CategoriaDeUsuario getCategoriaDeUsuario() {
 		return categoriaDeUsuario;

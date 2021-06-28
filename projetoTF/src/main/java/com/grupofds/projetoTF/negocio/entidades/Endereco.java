@@ -58,9 +58,7 @@ public class Endereco {
 		this.reclamacao = reclamacao;
 	}
 	
-	public Endereco() {
-		
-	}
+	public Endereco() {}
 
 	public Reclamacao getReclamacao() {
 		return reclamacao;

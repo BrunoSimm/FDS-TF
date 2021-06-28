@@ -38,7 +38,7 @@ public class ReclamacaoServico {
 			throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
 		}
 		if (usuario.getCategoriaDeUsuario() != CategoriaDeUsuario.CIDADAO) {
-			throw new IllegalArgumentException("ERRO! Usuário não possui permissão para criar nova reclamação.");
+			throw new IllegalArgumentException("ERRO! Usuário não possui permissão para criar nova Reclamação.");
 		}
 
 		Reclamacao reclamacao = new Reclamacao(null, usuario, reclamacaoDTO.getTitulo(), reclamacaoDTO.getDescricao(), LocalDateTime.now(), 
@@ -56,8 +56,8 @@ public class ReclamacaoServico {
 		if (reclamacao == null) {
 			throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id válido.");
 		}
-		if (!user.equals(reclamacao.getUsuario_id())) {
-			throw new IllegalArgumentException("Usuário de Id" + user.getId() +"não possui permissão para atualizar esta Reclamação.");
+		if (!user.equals(reclamacao.getUsuario())) {
+			throw new IllegalArgumentException("Usuário de Id " + user.getId() +" não possui permissão para atualizar esta Reclamação.");
 		}
 
 		//Valida novos dados da Reclamacao.
@@ -73,6 +73,7 @@ public class ReclamacaoServico {
 
 		Endereco novoEndereco = reclamacaoDTO.getEndereco();
 		if (novoEndereco != null) {
+			//TODO: verificar persistencia no banco de dados.
 			reclamacao.setEndereco(novoEndereco);
 		}
 

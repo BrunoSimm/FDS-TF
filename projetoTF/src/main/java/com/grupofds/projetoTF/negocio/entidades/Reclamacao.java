@@ -30,8 +30,8 @@ public class Reclamacao {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
-	@NotNull(message = "usuario_id deve ser preenchido")
-	private Usuario usuario_id;
+	@NotNull(message = "Usuario deve ser preenchido")
+	private Usuario usuario;
 	
 	@Column
 	@NotBlank(message = "Titulo deve ser preenchido.")
@@ -62,13 +62,13 @@ public class Reclamacao {
 	@OneToMany(mappedBy = "reclamacao")
 	private List<Comentario> comentarios;
 	
-	public Reclamacao(Long id, Usuario usuario_id,
+	public Reclamacao(Long id, Usuario usuario,
 			@NotBlank(message = "Titulo deve ser preenchido.") String titulo,
 			@NotBlank(message = "Descrição deve ser preenchido.") String descricao, LocalDateTime data,
 			Endereco endereco, String imagem, @NotBlank(message = "Categoria deve ser preenchida.") String categoria,
 			StatusReclamacoes status, List<Comentario> comentarios) {
 		this.id = id;
-		this.usuario_id = usuario_id;
+		this.usuario = usuario;
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.data = data;
@@ -79,16 +79,14 @@ public class Reclamacao {
 		this.comentarios = comentarios;
 	}
 
-	public Reclamacao() {
-		
-	}
+	public Reclamacao() {}
 	
-	public Usuario getUsuario_id() {
-		return usuario_id;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUsuario_id(Usuario usuario_id) {
-		this.usuario_id = usuario_id;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Long getId() {
@@ -148,7 +146,7 @@ public class Reclamacao {
 
 	@Override
 	public String toString() {
-		return "Reclamacao [id=" + id + ", usuario=" + usuario_id + ", titulo=" + titulo + ", descricao=" + descricao
+		return "Reclamacao [id=" + id + ", usuario=" + usuario + ", titulo=" + titulo + ", descricao=" + descricao
 				+ ", data=" + data + ", endereco=" + endereco + ", imagem=" + imagem + ", categoria=" + categoria
 				+ ", status=" + status + ", comentarios=" + comentarios + "]";
 	}

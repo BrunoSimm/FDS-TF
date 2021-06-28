@@ -35,7 +35,6 @@ public class ServicoRelatoriosAdmin {
     public Long getTotalReclamacoesByCategoriaAndPeriodo(Long usuarioId, String categoria, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
         this.validaUsuarioAdmin(usuarioId);
         return repositorioReclamacoes.getByCategoria(categoria).stream()
-            //.filter(r -> !r.getData().isBefore(periodoInicial) && !r.getData().isAfter(periodoFinal)) => LOGICA PARA A FUNÇÃO DE REPOSITORIO
             .filter(repositorioReclamacoes.getByPeriodo(periodoInicial, periodoFinal)::contains)
             .count();
     }

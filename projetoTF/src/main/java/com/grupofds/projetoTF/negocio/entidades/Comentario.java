@@ -61,9 +61,7 @@ public class Comentario {
 		this.reclamacao = reclamacao;
 	}
 	
-	public Comentario () {
-		
-	}
+	public Comentario () {}
 	
 	public Reclamacao getReclamacao() {
 		return reclamacao;
