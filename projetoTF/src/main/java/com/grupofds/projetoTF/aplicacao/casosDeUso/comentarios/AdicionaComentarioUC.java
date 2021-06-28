@@ -3,6 +3,7 @@ package com.grupofds.projetoTF.aplicacao.casosDeUso.comentarios;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.grupofds.projetoTF.aplicacao.dtos.requisicoes.CriarComentarioRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Comentario;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 import com.grupofds.projetoTF.negocio.servicos.ComentariosServico;
@@ -16,8 +17,8 @@ public class AdicionaComentarioUC {
 		this.comentariosServico = comentariosServico;
 	}
 	
-	public void run(Comentario comentario, Long usuarioId, StatusReclamacoes status) {
-		comentariosServico.addComentario(usuarioId, comentario.getReclamacao().getId(), comentario.getDescricao(), comentario.getImagem(), status);
+	public Comentario run(CriarComentarioRequisicaoDTO criarRequisicaoDTO) {
+		return comentariosServico.addComentario(criarRequisicaoDTO);
 	}
 	
 }

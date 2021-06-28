@@ -52,7 +52,7 @@ public class ReclamacaoController {
 
 	@PutMapping(value = "/id/{idReclamacao}") // /id/3?idUsuario=11
 	public Reclamacao atualizaReclamacao(@PathVariable Long idReclamacao, @RequestParam Long idUsuario, @RequestBody EditarReclamacaoRequisicaoDTO reclamacao) {
-		return atualizaReclamacaoUC.run(idUsuario, idReclamacao, reclamacao);
+		return null;//atualizaReclamacaoUC.run(idUsuario, idReclamacao, reclamacao);
 	}
 	
 	@GetMapping(value = "/id")

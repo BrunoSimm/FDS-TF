@@ -1,5 +1,6 @@
 package com.grupofds.projetoTF.negocio.servicos;
 
+import com.grupofds.projetoTF.aplicacao.dtos.requisicoes.CriarComentarioRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Comentario;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
@@ -28,24 +29,24 @@ public class ComentariosServico {
 		this.repositorioUsuarios = repositorioUsuarios;
 	}
 
-	public Comentario addComentario(Long usuarioId, Long idReclamacao, String mensagem, String imagem, StatusReclamacoes status) {
-        this.validaUsuario(usuarioId);
+	public Comentario addComentario(CriarComentarioRequisicaoDTO comentarioDTO) {
+        this.validaUsuario(comentarioDTO.getUsuario_id());
         
-        Reclamacao reclamacao = repositorioReclamacoes.getById(idReclamacao);
+        Reclamacao reclamacao = repositorioReclamacoes.getById(comentarioDTO.getReclamacao_id());
         
         if (reclamacao.getStatus() == StatusReclamacoes.ENCERRADA) {
             throw new IllegalArgumentException("Impossivel adicionar Comentario. Reclamacao com status ENCERRADA.");
         }
         
-        Usuario usuario = repositorioUsuarios.getById(usuarioId);
+        Usuario usuario = repositorioUsuarios.getById(comentarioDTO.getUsuario_id());
         
-        if (status == StatusReclamacoes.ENCERRADA
+        if (comentarioDTO.getStatus() == StatusReclamacoes.ENCERRADA
                 && usuario.getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
             throw new IllegalArgumentException("Usuario sem permissao para encerrar a Reclamacao.");
         }
         
-        Comentario comentario = new Comentario(usuario, mensagem, LocalDateTime.now(), imagem, reclamacao);
-        
+        Comentario comentario = new Comentario(usuario, comentarioDTO.getDescricao(), LocalDateTime.now(), comentarioDTO.getImagem(), reclamacao);
+        System.out.println(comentario);
         return this.repositorioComentarios.addComentario(comentario);
     }
 

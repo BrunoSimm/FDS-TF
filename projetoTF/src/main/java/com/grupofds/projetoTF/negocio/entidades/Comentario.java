@@ -101,5 +101,10 @@ public class Comentario {
     public void setImagem(String imagem) {
         this.imagem = imagem;
     }
-    
+
+	@Override
+	public String toString() {
+		return "Comentario [id=" + id + ", usuario=" + usuario + ", descricao=" + descricao + ", data=" + data
+				+ ", imagem=" + imagem + ", reclamacao=" + reclamacao + "]";
+	}
 }
