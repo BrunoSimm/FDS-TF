@@ -16,8 +16,8 @@ public class AdicionaComentarioUC {
 		this.comentariosServico = comentariosServico;
 	}
 	
-	public void run(Comentario comentario, Long usuarioId, Long idReclamacao, String mensagem, String imagem, StatusReclamacoes status) {
-		comentariosServico.addComentario(usuarioId,idReclamacao,mensagem,imagem,status);
+	public void run(Comentario comentario, Long usuarioId, StatusReclamacoes status) {
+		comentariosServico.addComentario(usuarioId, comentario.getReclamacao().getId(), comentario.getDescricao(), comentario.getImagem(), status);
 	}
 	
 }

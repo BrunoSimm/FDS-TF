@@ -2,8 +2,6 @@ package com.grupofds.projetoTF.aplicacao.dtos;
 
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.stereotype.Component;
-
 import com.grupofds.projetoTF.negocio.entidades.Endereco;
 
 public class ReclamacaoRequisicaoDTO {
