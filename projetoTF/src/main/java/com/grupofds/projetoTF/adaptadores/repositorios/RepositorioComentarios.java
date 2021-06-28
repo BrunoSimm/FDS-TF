@@ -32,7 +32,7 @@ public interface RepositorioComentarios extends IRepositorioComentarios, JpaRepo
 	 	
 	    Comentario getById(Long id);
 	    
-	    @Query(value = "select * from comentarios where comentarios.id_reclamacao_fk = :idReclamacao", nativeQuery = true)
+	    @Query(value = "select * from comentarios where comentarios.reclamacao_id = :idReclamacao", nativeQuery = true)
 	    List<Comentario> getByReclamacao(@Param("idReclamacao") Long idReclamacao);
 	    
 	    @Query(value = "select * from comentarios where comentarios.id_usuario_fk = :idUsuario", nativeQuery = true)

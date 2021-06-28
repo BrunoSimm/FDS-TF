@@ -38,36 +38,35 @@ public class Comentario {
     @Column(nullable = true)
     private String imagem;
 
-    @ManyToOne
-    @JoinColumn(name = "id_reclamacao_fk", nullable = false)
-    private Reclamacao reclamacao;
+    @JoinColumn(name = "reclamacao_id")
+    private Long reclamacaoId;
     
 	public Comentario(Long id, Usuario usuario, @NotBlank(message = "Descrição deve sere preenchida.") String descricao,
-			LocalDateTime data, String imagem, Reclamacao reclamacao) {
+			LocalDateTime data, String imagem, Long reclamacao) {
 		this.id = id;
 		this.usuario = usuario;
 		this.descricao = descricao;
 		this.data = data;
 		this.imagem = imagem;
-		this.reclamacao = reclamacao;
+		this.reclamacaoId = reclamacao;
 	}
 	
 	public Comentario(Usuario usuario, @NotBlank(message = "Descrição deve sere preenchida.") String descricao,
-			LocalDateTime data, String imagem, Reclamacao reclamacao) {
+			LocalDateTime data, String imagem, Long reclamacao) {
 		this.usuario = usuario;
 		this.descricao = descricao;
 		this.data = data;
 		this.imagem = imagem;
-		this.reclamacao = reclamacao;
+		this.reclamacaoId = reclamacao;
 	}
 	
 	public Comentario () {}
 	
-	public Reclamacao getReclamacao() {
-		return reclamacao;
+	public Long getReclamacaoId() {
+		return reclamacaoId;
 	}
-	public void setReclamacao(Reclamacao reclamacao) {
-		this.reclamacao = reclamacao;
+	public void setReclamacaoId(Long reclamacao) {
+		this.reclamacaoId = reclamacao;
 	}
 	public LocalDateTime getData() {
         return data;
@@ -103,6 +102,6 @@ public class Comentario {
 	@Override
 	public String toString() {
 		return "Comentario [id=" + id + ", usuario=" + usuario + ", descricao=" + descricao + ", data=" + data
-				+ ", imagem=" + imagem + ", reclamacao=" + reclamacao + "]";
+				+ ", imagem=" + imagem +"]";
 	}
 }
