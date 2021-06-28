@@ -18,7 +18,7 @@ import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamaco
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamacoesByUsuarioUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.CriaReclamacaoUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.EncerraReclamacaoUC;
-import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ListaTodasReclamacoes;
+import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ListaTodasReclamacoesUC;
 import com.grupofds.projetoTF.aplicacao.dtos.ReclamacaoRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 
@@ -33,7 +33,7 @@ public class ReclamacaoController {
 	private ConsultaReclamacoesByUsuarioUC consultaReclamacoesByUsuarioUC;
 	private CriaReclamacaoUC criaReclamacaoUC;
 	private EncerraReclamacaoUC encerraReclamacaoUC;
-	private ListaTodasReclamacoes listaTodasReclamacoesUC;
+	private ListaTodasReclamacoesUC listaTodasReclamacoesUC;
 	
 	@Autowired
 	public ReclamacaoController(AtualizaReclamacaoUC atualizaReclamacaoUC,
@@ -41,7 +41,7 @@ public class ReclamacaoController {
 			ConsultaReclamacoesByBairroUC consultaReclamacoesByBairroUC,
 			ConsultaReclamacoesByCategoriaUC consultaReclamacoesByCategoriaUC,
 			ConsultaReclamacoesByUsuarioUC consultaReclamacoesByUsuarioUC, CriaReclamacaoUC criaReclamacaoUC,
-			EncerraReclamacaoUC encerraReclamacaoUC, ListaTodasReclamacoes listaTodasReclamacoesUC) {
+			EncerraReclamacaoUC encerraReclamacaoUC, ListaTodasReclamacoesUC listaTodasReclamacoesUC) {
 		this.atualizaReclamacaoUC = atualizaReclamacaoUC;
 		this.consultaReclamacaoByIdUC = consultaReclamacaoByIdUC;
 		this.consultaReclamacoesByBairroUC = consultaReclamacoesByBairroUC;

@@ -26,55 +26,59 @@ public class ReclamacaoServico {
 		this.repositorioUsuarios = repositorioUsuarios;
 	}
 
-	public Reclamacao updateReclamacao(Long usuarioId, Long reclamacaoId, Reclamacao novosDadosReclamacao) {
-    	Usuario user = repositorioUsuarios.getById(usuarioId);
-    	if (user != null) {
-    		Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
-    		if ((reclamacao == null)) {
-    			throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id válido."); //TODO -> ReclamacaoNotFoundException
-    		} else {
-    			if (user.getId() == reclamacao.getUsuario_id().getId()) {
-    				return repositorioReclamacoes.updateReclamacao(novosDadosReclamacao);
-    			} else throw new IllegalArgumentException("Usuário de Id" + user.getId() +"não possui permissão para atualizar esta Reclamação.");
-    		}
-    	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido."); //TODO -> UserNotFoundException
-    }
-
     public Reclamacao createReclamacao(ReclamacaoRequisicaoDTO reclamacaoDTO) {
-    	if (reclamacaoDTO.getUsuario_id() != null) {
-    		
-    		Usuario usuario = repositorioUsuarios.getById(reclamacaoDTO.getUsuario_id());
-    		
-    		if((usuario.getId() != null)) {
-    			if (usuario.getCategoriaDeUsuario() == CategoriaDeUsuario.CIDADAO) {
-    				Reclamacao reclamacao = new Reclamacao(null, usuario, reclamacaoDTO.getTitulo(), reclamacaoDTO.getDescricao(), LocalDateTime.now(), 
-        	    			reclamacaoDTO.getEndereco() , reclamacaoDTO.getImagem(), reclamacaoDTO.getCategoria(), StatusReclamacoes.ABERTA, null);
-        	    	return repositorioReclamacoes.createReclamacao(reclamacao);
-    			} else throw new IllegalArgumentException("ERRO! Usuário não possui permissão para criar nova reclamação.");
-    			
-    		} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
-    		
-    	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
+    	if (reclamacaoDTO.getUsuario_id() == null) {
+			throw new IllegalArgumentException("ERRO! Usuário Id não pode ser null.");
+		}
+
+		Usuario usuario = repositorioUsuarios.getById(reclamacaoDTO.getUsuario_id());
+		if((usuario.getId() == null)) {
+			throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
+		}
+		if (usuario.getCategoriaDeUsuario() != CategoriaDeUsuario.CIDADAO) {
+			throw new IllegalArgumentException("ERRO! Usuário não possui permissão para criar nova reclamação.");
+		}
+
+		Reclamacao reclamacao = new Reclamacao(null, usuario, reclamacaoDTO.getTitulo(), reclamacaoDTO.getDescricao(), LocalDateTime.now(), 
+				reclamacaoDTO.getEndereco() , reclamacaoDTO.getImagem(), reclamacaoDTO.getCategoria(), StatusReclamacoes.ABERTA, null);
+		return repositorioReclamacoes.createReclamacao(reclamacao);
     }
 
-    public Reclamacao encerraReclamacao(Long usuarioOficialId, Long reclamacaoId) {
+	public Reclamacao updateReclamacao(Long usuarioId, Long reclamacaoId, Reclamacao novosDadosReclamacao) {
+		Usuario user = repositorioUsuarios.getById(usuarioId);
+    	if (user == null) {
+			throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
+		}
+
+		Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
+		if (reclamacao == null) {
+			throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id válido.");
+		}
+		if (!user.equals(reclamacao.getUsuario_id())) {
+			throw new IllegalArgumentException("Usuário de Id" + user.getId() +"não possui permissão para atualizar esta Reclamação.");
+		}
+
+		return repositorioReclamacoes.updateReclamacao(novosDadosReclamacao);
+    }
+
+/*     public Reclamacao encerraReclamacao(Long usuarioOficialId, Long reclamacaoId) {
     	Usuario user = repositorioUsuarios.getById(usuarioOficialId);
     	if ((user != null)) {
     		if (user.getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL) {
-    			throw new IllegalArgumentException("ERRO! Usuário não possui as permissões necessárias para encerrar esta Reclamação."); //TODO -> PermissoesException
+    			throw new IllegalArgumentException("ERRO! Usuário não possui as permissões necessárias para encerrar esta Reclamação.");
     		} else {
     			Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
         		if ((reclamacao == null)) {
-        			throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id válido."); //TODO -> ReclamacaoNotFoundException
+        			throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id válido.");
         		} else {
         			reclamacao.setStatus(StatusReclamacoes.ENCERRADA);
         			return repositorioReclamacoes.updateReclamacao(reclamacao);
         		}
     		}
     		
-    	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido."); //TODO -> UserNotFoundException
+    	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
     }
-
+ */
     public Reclamacao getReclamacaoById(Long reclamacaoId) {
         return repositorioReclamacoes.getById(reclamacaoId);
     }
