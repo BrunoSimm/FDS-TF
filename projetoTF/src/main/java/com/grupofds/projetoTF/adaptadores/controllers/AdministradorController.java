@@ -160,9 +160,9 @@ public class AdministradorController {
     }
 
     @GetMapping(value = "/totalReclamacoesByCategoria")
-    public TotalReclamacoesByCategoriaDTO getConsultaTotalReclamacoesByCategoriaUC(@RequestBody long usuarioId,
-            @RequestBody String categoria, @RequestBody String periodoInicial,
-            @RequestBody String periodoFinal) {
+    public TotalReclamacoesByCategoriaDTO getConsultaTotalReclamacoesByCategoriaUC(@RequestParam long usuarioId,
+            @RequestParam String categoria, @RequestParam String periodoInicial,
+            @RequestParam String periodoFinal) {
         LocalDateTime periodoInicialLDT = LocalDateTime.parse(periodoInicial);
         LocalDateTime periodoFinalLDT = LocalDateTime.parse(periodoFinal);
         Long totalReclamacoes = consultaTotalReclamacoesByCategoriaUC.run(usuarioId, categoria, periodoInicialLDT,
