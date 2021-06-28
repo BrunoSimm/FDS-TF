@@ -93,8 +93,8 @@ public class AdministradorController {
     }
 
     @GetMapping(value = "/numeroMedioComentariosByPeriodo")
-    public NumeroMedioComentariosByPeriodoDTO getConsultaNumeroMedioComentariosByPeriodoUC(@RequestParam Long usuarioId,
-            @RequestParam LocalDateTime periodoInicial, @RequestParam LocalDateTime periodoFinal) {
+    public NumeroMedioComentariosByPeriodoDTO getConsultaNumeroMedioComentariosByPeriodoUC(@RequestBody Long usuarioId,
+            @RequestBody LocalDateTime periodoInicial, @RequestBody LocalDateTime periodoFinal) {
         Double mediaComentarios = consultaNumeroMedioComentariosByPeriodoUC.run(usuarioId, periodoInicial,
                 periodoFinal);
         return new NumeroMedioComentariosByPeriodoDTO(periodoInicial, periodoFinal, mediaComentarios);
