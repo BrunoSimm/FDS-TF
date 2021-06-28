@@ -42,13 +42,6 @@ public class Usuario {
 		this.categoriaDeUsuario = categoriaDeUsuario;
 	}
 	
-	public Usuario(Long id, String categoriaDeUsuario, String email, String nome) {
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-		this.categoriaDeUsuario = CategoriaDeUsuario.valueOf(categoriaDeUsuario);
-	}
-	
 	public Usuario() {
 		
 	}

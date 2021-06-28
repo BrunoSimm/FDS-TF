@@ -1,10 +1,10 @@
-package com.grupofds.projetoTF.aplicacao.dtos;
+package com.grupofds.projetoTF.aplicacao.dtos.requisicoes;
 
 import javax.validation.constraints.NotBlank;
 
 import com.grupofds.projetoTF.negocio.entidades.Endereco;
 
-public class ReclamacaoRequisicaoDTO {
+public class CriarReclamacaoRequisicaoDTO {
 	
 	@NotBlank(message = "usuario_id deve ser preenchido")
 	private Long usuario_id;
@@ -23,7 +23,7 @@ public class ReclamacaoRequisicaoDTO {
 	@NotBlank(message = "Categoria deve ser preenchida.")
 	private String categoria;
 
-	public ReclamacaoRequisicaoDTO(@NotBlank(message = "usuario_id deve ser preenchido") Long usuario_id,
+	public CriarReclamacaoRequisicaoDTO(@NotBlank(message = "usuario_id deve ser preenchido") Long usuario_id,
 			@NotBlank(message = "Titulo deve ser preenchido.") String titulo,
 			@NotBlank(message = "Descrição deve ser preenchido.") String descricao,
 			@NotBlank(message = "Endereço deve ser preenchido.") Endereco endereco, String imagem,
