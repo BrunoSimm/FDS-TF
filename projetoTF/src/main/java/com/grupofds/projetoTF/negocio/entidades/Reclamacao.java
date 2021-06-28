@@ -79,6 +79,10 @@ public class Reclamacao {
 		this.comentarios = comentarios;
 	}
 
+	public Reclamacao() {
+		
+	}
+	
 	public Usuario getUsuario_id() {
 		return usuario_id;
 	}

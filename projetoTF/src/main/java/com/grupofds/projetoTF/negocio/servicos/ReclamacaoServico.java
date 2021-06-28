@@ -57,24 +57,6 @@ public class ReclamacaoServico {
     	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
     }
 
-    public Reclamacao encerraReclamacao(Long usuarioOficialId, Long reclamacaoId) {
-    	Usuario user = repositorioUsuarios.getById(usuarioOficialId);
-    	if ((user != null)) {
-    		if (user.getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL) {
-    			throw new IllegalArgumentException("ERRO! Usuário não possui as permissões necessárias para encerrar esta Reclamação."); //TODO -> PermissoesException
-    		} else {
-    			Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
-        		if ((reclamacao == null)) {
-        			throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id válido."); //TODO -> ReclamacaoNotFoundException
-        		} else {
-        			reclamacao.setStatus(StatusReclamacoes.ENCERRADA);
-        			return repositorioReclamacoes.updateReclamacao(reclamacao);
-        		}
-    		}
-    		
-    	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido."); //TODO -> UserNotFoundException
-    }
-
     public Reclamacao getReclamacaoById(Long reclamacaoId) {
         return repositorioReclamacoes.getById(reclamacaoId);
     }

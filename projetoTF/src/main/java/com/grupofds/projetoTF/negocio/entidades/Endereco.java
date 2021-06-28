@@ -57,7 +57,10 @@ public class Endereco {
 		this.estado = estado;
 		this.reclamacao = reclamacao;
 	}
-
+	
+	public Endereco() {
+		
+	}
 
 	public Reclamacao getReclamacao() {
 		return reclamacao;

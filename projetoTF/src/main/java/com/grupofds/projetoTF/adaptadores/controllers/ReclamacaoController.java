@@ -17,7 +17,6 @@ import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamaco
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamacoesByCategoriaUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamacoesByUsuarioUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.CriaReclamacaoUC;
-import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.EncerraReclamacaoUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ListaTodasReclamacoes;
 import com.grupofds.projetoTF.aplicacao.dtos.ReclamacaoRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
@@ -32,7 +31,6 @@ public class ReclamacaoController {
 	private ConsultaReclamacoesByCategoriaUC consultaReclamacoesByCategoriaUC;
 	private ConsultaReclamacoesByUsuarioUC consultaReclamacoesByUsuarioUC;
 	private CriaReclamacaoUC criaReclamacaoUC;
-	private EncerraReclamacaoUC encerraReclamacaoUC;
 	private ListaTodasReclamacoes listaTodasReclamacoesUC;
 	
 	@Autowired
@@ -40,15 +38,13 @@ public class ReclamacaoController {
 			ConsultaReclamacaoByIdUC consultaReclamacaoByIdUC,
 			ConsultaReclamacoesByBairroUC consultaReclamacoesByBairroUC,
 			ConsultaReclamacoesByCategoriaUC consultaReclamacoesByCategoriaUC,
-			ConsultaReclamacoesByUsuarioUC consultaReclamacoesByUsuarioUC, CriaReclamacaoUC criaReclamacaoUC,
-			EncerraReclamacaoUC encerraReclamacaoUC, ListaTodasReclamacoes listaTodasReclamacoesUC) {
+			ConsultaReclamacoesByUsuarioUC consultaReclamacoesByUsuarioUC, CriaReclamacaoUC criaReclamacaoUC, ListaTodasReclamacoes listaTodasReclamacoesUC) {
 		this.atualizaReclamacaoUC = atualizaReclamacaoUC;
 		this.consultaReclamacaoByIdUC = consultaReclamacaoByIdUC;
 		this.consultaReclamacoesByBairroUC = consultaReclamacoesByBairroUC;
 		this.consultaReclamacoesByCategoriaUC = consultaReclamacoesByCategoriaUC;
 		this.consultaReclamacoesByUsuarioUC = consultaReclamacoesByUsuarioUC;
 		this.criaReclamacaoUC = criaReclamacaoUC;
-		this.encerraReclamacaoUC = encerraReclamacaoUC;
 		this.listaTodasReclamacoesUC = listaTodasReclamacoesUC;
 	}
 
@@ -79,20 +75,12 @@ public class ReclamacaoController {
 	
 	@PostMapping
 	public Reclamacao criaReclamacao(@RequestBody ReclamacaoRequisicaoDTO reclamacaoDTO) {
-		System.out.println(reclamacaoDTO.toString());
-		System.out.println(reclamacaoDTO.getEndereco().toString());
-		
 		return criaReclamacaoUC.run(reclamacaoDTO);
-	}
-	
-	@PostMapping(value = "/id/{idReclamacao}")
-	public Reclamacao encerraReclamacao(@PathVariable Long idReclamacao, @RequestBody Long idUsuarioOficial) {
-		return encerraReclamacaoUC.run(idUsuarioOficial, idReclamacao);
-	}
+	}//Ok
 	
 	@GetMapping
 	public List<Reclamacao> findAll(){
 		return listaTodasReclamacoesUC.run();
-	}
+	}//Ok
 	
 }
