@@ -120,11 +120,7 @@ public class ServicoRelatoriosAdmin {
         List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
         int totalReclamacoes = aux.size();
         int totalReclamacoesRespondidas = (int) aux.stream()
-            .filter(
-                r -> r.getComentarios() != null
-                    ? r.getComentarios().stream().anyMatch(c -> c.getUsuario().getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL)
-                    : false
-            )
+            .filter(r -> repositorioComentarios.getByReclamacao(r.getId()).stream().anyMatch(c -> c.getUsuario().getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL))
             .count();
         return (100.0 * totalReclamacoesRespondidas / totalReclamacoes);
     }
@@ -142,11 +138,7 @@ public class ServicoRelatoriosAdmin {
         List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
         int totalReclamacoes = aux.size();
         int totalReclamacoesRespondidas = (int) aux.stream()
-            .filter(
-                r -> r.getComentarios() != null
-                    ? r.getComentarios().stream().anyMatch(c -> c.getUsuario().equals(userOficial))
-                    : false
-                )
+            .filter(r -> repositorioComentarios.getByReclamacao(r.getId()).stream().anyMatch(c -> c.getUsuario().equals(userOficial)))
             .count();
         Double percentualRespondido = (100.0 * totalReclamacoesRespondidas / totalReclamacoes);
         return new PercentualRespondidoByUserOficialDTO(usuarioOficialId, nome, percentualRespondido);
