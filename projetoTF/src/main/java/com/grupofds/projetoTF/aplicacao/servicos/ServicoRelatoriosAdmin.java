@@ -69,7 +69,7 @@ public class ServicoRelatoriosAdmin {
         List<Comentario> aux = repositorioComentarios.getByPeriodo(periodoInicial, periodoFinal);
         int totalComentarios = aux.size();
         int totalReclamacoes = aux.stream()
-            .map(Comentario::getReclamacao)
+            .map(Comentario::getReclamacaoId)
             .collect(Collectors.toSet())
             .size();
         return (100.0 * totalComentarios / totalReclamacoes);
@@ -120,7 +120,11 @@ public class ServicoRelatoriosAdmin {
         List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
         int totalReclamacoes = aux.size();
         int totalReclamacoesRespondidas = (int) aux.stream()
-            .filter(r -> r.getComentarios().stream().anyMatch(c -> c.getUsuario().getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL))
+            .filter(
+                r -> r.getComentarios() != null
+                    ? r.getComentarios().stream().anyMatch(c -> c.getUsuario().getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL)
+                    : false
+            )
             .count();
         return (100.0 * totalReclamacoesRespondidas / totalReclamacoes);
     }
@@ -138,7 +142,11 @@ public class ServicoRelatoriosAdmin {
         List<Reclamacao> aux = repositorioReclamacoes.getReclamacoes();
         int totalReclamacoes = aux.size();
         int totalReclamacoesRespondidas = (int) aux.stream()
-            .filter(r -> r.getComentarios().stream().anyMatch(c -> c.getUsuario().equals(userOficial)))
+            .filter(
+                r -> r.getComentarios() != null
+                    ? r.getComentarios().stream().anyMatch(c -> c.getUsuario().equals(userOficial))
+                    : false
+                )
             .count();
         Double percentualRespondido = (100.0 * totalReclamacoesRespondidas / totalReclamacoes);
         return new PercentualRespondidoByUserOficialDTO(usuarioOficialId, nome, percentualRespondido);

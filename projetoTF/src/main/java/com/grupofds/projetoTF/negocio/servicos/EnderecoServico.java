@@ -23,20 +23,16 @@ public class EnderecoServico {
 	public Endereco updateEndereco(Long usuarioId, Long reclamacaoId, Endereco novoEndereco) {
     	Usuario user = repositorioUsuarios.getById(usuarioId);
     	if (user == null) {
-            throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id de Usuário válido."); //TODO -> UserNotFoundException
+            throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id de Usuário válido.");
         } 
         Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
         if (reclamacao == null) {
-            throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id de Reclamação válido."); //TODO -> ReclamacaoNotFoundException
+            throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id de Reclamação válido.");
         }
         if (!user.equals(repositorioReclamacoes.getById(reclamacaoId).getUsuario())) {
             throw new IllegalArgumentException("Usuário de Id " + user.getId() + " não possui permissão para atualizar esta Reclamação.");
         } 
         return repositorioEnderecos.updateEndereco(novoEndereco);
-    }
-
-    public Endereco createEndereco(Endereco endereco) {
-        return repositorioEnderecos.createEndereco(endereco);
     }
 
     public Endereco getById(Long enderecoId) {
