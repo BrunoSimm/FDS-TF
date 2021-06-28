@@ -21,19 +21,19 @@ public class Usuario {
     private Long id;
     
     @Column(nullable = false)
-    @NotBlank(message = "Nome inválido")
+    //@NotBlank(message = "Nome inválido")
     private String nome;
     
     @Column(nullable = false)
-    @Email(message = "E-mail inválido")
+    //@Email(message = "E-mail inválido")
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @NotNull(message = "Categoria inválida")
+    //@NotNull(message = "Categoria inválida")
     @Column(nullable = false)
     private CategoriaDeUsuario categoriaDeUsuario;
-
-	public Usuario(Long id, @NotNull(message = "Nome inválido") String nome,
+	
+	public Usuario(Long id, @NotBlank(message = "Nome inválido") String nome,
 			@Email(message = "E-mail inválido") String email,
 			@NotNull(message = "Categoria inválida") CategoriaDeUsuario categoriaDeUsuario) {
 		this.id = id;
@@ -42,6 +42,17 @@ public class Usuario {
 		this.categoriaDeUsuario = categoriaDeUsuario;
 	}
 	
+	public Usuario(Long id, String categoriaDeUsuario, String email, String nome) {
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.categoriaDeUsuario = CategoriaDeUsuario.valueOf(categoriaDeUsuario);
+	}
+	
+	public Usuario() {
+		
+	}
+
 	public CategoriaDeUsuario getCategoriaDeUsuario() {
 		return categoriaDeUsuario;
 	}

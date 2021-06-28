@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.grupofds.projetoTF.negocio.entidades.usuarios.Usuario;
 
@@ -29,7 +30,7 @@ public class Reclamacao {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "usuario_id", referencedColumnName = "id")
-	@NotBlank(message = "usuario_id deve ser preenchido")
+	@NotNull(message = "usuario_id deve ser preenchido")
 	private Usuario usuario_id;
 	
 	@Column
@@ -61,7 +62,7 @@ public class Reclamacao {
 	@OneToMany(mappedBy = "reclamacao")
 	private List<Comentario> comentarios;
 	
-	public Reclamacao(Long id, @NotBlank(message = "usuario_id deve ser preenchido") Usuario usuario_id,
+	public Reclamacao(Long id, Usuario usuario_id,
 			@NotBlank(message = "Titulo deve ser preenchido.") String titulo,
 			@NotBlank(message = "Descrição deve ser preenchido.") String descricao, LocalDateTime data,
 			Endereco endereco, String imagem, @NotBlank(message = "Categoria deve ser preenchida.") String categoria,

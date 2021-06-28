@@ -19,7 +19,7 @@ import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamaco
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.CriaReclamacaoUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.EncerraReclamacaoUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ListaTodasReclamacoes;
-import com.grupofds.projetoTF.negocio.entidades.Endereco;
+import com.grupofds.projetoTF.aplicacao.dtos.ReclamacaoRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 
 @RestController
@@ -78,10 +78,11 @@ public class ReclamacaoController {
 	}
 	
 	@PostMapping
-	public Reclamacao criaReclamacao(@RequestBody Reclamacao reclamacao) {
-		System.out.println(reclamacao.toString());
-		System.out.println(reclamacao.getEndereco().toString());
-		return criaReclamacaoUC.run(reclamacao);
+	public Reclamacao criaReclamacao(@RequestBody ReclamacaoRequisicaoDTO reclamacaoDTO) {
+		System.out.println(reclamacaoDTO.toString());
+		System.out.println(reclamacaoDTO.getEndereco().toString());
+		
+		return criaReclamacaoUC.run(reclamacaoDTO);
 	}
 	
 	@PostMapping(value = "/id/{idReclamacao}")

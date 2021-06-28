@@ -29,7 +29,7 @@ public class EnderecoServico {
         if (reclamacao == null) {
             throw new IllegalArgumentException("ERRO! Reclamação não encontrada. Indique um Id de Reclamação válido."); //TODO -> ReclamacaoNotFoundException
         }
-        if (!user.equals(repositorioReclamacoes.getById(reclamacaoId).getUsuario())) {
+        if (!user.equals(repositorioReclamacoes.getById(reclamacaoId).getUsuario_id())) {
             throw new IllegalArgumentException("Usuário de Id " + user.getId() + " não possui permissão para atualizar esta Reclamação.");
         } 
         return repositorioEnderecos.updateEndereco(novoEndereco);

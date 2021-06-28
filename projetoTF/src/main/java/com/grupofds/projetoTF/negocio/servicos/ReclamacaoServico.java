@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.grupofds.projetoTF.aplicacao.dtos.ReclamacaoRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 import com.grupofds.projetoTF.negocio.entidades.usuarios.CategoriaDeUsuario;
@@ -39,10 +40,21 @@ public class ReclamacaoServico {
     	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido."); //TODO -> UserNotFoundException
     }
 
-    public Reclamacao createReclamacao(Reclamacao reclamacao) {
-    	reclamacao.setData(LocalDateTime.now());
-    	reclamacao.setStatus(StatusReclamacoes.ABERTA);
-        return repositorioReclamacoes.createReclamacao(reclamacao);
+    public Reclamacao createReclamacao(ReclamacaoRequisicaoDTO reclamacaoDTO) {
+    	if (reclamacaoDTO.getUsuario_id() != null) {
+    		
+    		Usuario usuario = repositorioUsuarios.getById(reclamacaoDTO.getUsuario_id());
+    		
+    		if((usuario.getId() != null)) {
+    			if (usuario.getCategoriaDeUsuario() == CategoriaDeUsuario.CIDADAO) {
+    				Reclamacao reclamacao = new Reclamacao(null, usuario, reclamacaoDTO.getTitulo(), reclamacaoDTO.getDescricao(), LocalDateTime.now(), 
+        	    			reclamacaoDTO.getEndereco() , reclamacaoDTO.getImagem(), reclamacaoDTO.getCategoria(), StatusReclamacoes.ABERTA, null);
+        	    	return repositorioReclamacoes.createReclamacao(reclamacao);
+    			} else throw new IllegalArgumentException("ERRO! Usuário não possui permissão para criar nova reclamação.");
+    			
+    		} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
+    		
+    	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
     }
 
     public Reclamacao encerraReclamacao(Long usuarioOficialId, Long reclamacaoId) {

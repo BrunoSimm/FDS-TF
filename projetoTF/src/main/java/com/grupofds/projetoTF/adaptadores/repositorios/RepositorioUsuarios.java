@@ -15,9 +15,8 @@ import com.grupofds.projetoTF.negocio.repositorios.IRepositorioUsuarios;
 @Repository
 public interface RepositorioUsuarios extends JpaRepository<Usuario, Long>, IRepositorioUsuarios {
 	
-	Usuario getById(Long id);
-	
-	Usuario getById(int id);
+	@Query(value = "select * from usuarios where usuarios.id = :id", nativeQuery = true)
+	Usuario getById(@Param("id") Long id);
 	
 	@Query(value = "select * from usuarios where usuarios.categoria_de_usuario = :categoria", nativeQuery = true)
     List<Usuario> getUsuariosByCategoria(@Param("categoria") CategoriaDeUsuario categoriaDeUsuario);
