@@ -103,22 +103,54 @@ public class ReclamacaoServico {
     }
 
     public List<Reclamacao> getReclamacoesByCategoria(String categoria) {
-        return repositorioReclamacoes.getByCategoria(categoria);
+    	List<Reclamacao> reclamacoes = repositorioReclamacoes.getByCategoria(categoria);
+    	
+    	reclamacoes.forEach(reclamacao -> {
+			reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+		});
+    	
+        return reclamacoes;
     }
     
     public List<Reclamacao> getReclamacoesByUsuario(Long idUsuario) {
-        return repositorioReclamacoes.getByUsuario(idUsuario);
+    	
+    	List<Reclamacao> reclamacoes = repositorioReclamacoes.getByUsuario(idUsuario);
+    	
+    	reclamacoes.forEach(reclamacao -> {
+			reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+		});
+    	
+        return reclamacoes;
     }
 
     public List<Reclamacao> getReclamacoesByPeriodo(LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
-        return repositorioReclamacoes.getByPeriodo(periodoInicial, periodoFinal);
+    	List<Reclamacao> reclamacoes = repositorioReclamacoes.getByPeriodo(periodoInicial, periodoFinal);
+    	
+    	reclamacoes.forEach(reclamacao -> {
+			reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+		});
+    	
+        return reclamacoes;
     }
 
     public List<Reclamacao> getReclamacoesByBairro(String bairro) {
-        return repositorioReclamacoes.getByBairro(bairro);
+    	
+    	List<Reclamacao> reclamacoes = repositorioReclamacoes.getByBairro(bairro);
+    	
+    	reclamacoes.forEach(reclamacao -> {
+			reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+		});
+    	
+        return reclamacoes;
     }
 
 	public List<Reclamacao> getReclamacoes() {
-		return repositorioReclamacoes.getReclamacoes();
+		List<Reclamacao> reclamacoes = repositorioReclamacoes.getReclamacoes();
+    	
+		reclamacoes.forEach(reclamacao -> {
+			reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+		});
+    	
+        return reclamacoes;
 	}
 }

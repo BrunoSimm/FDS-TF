@@ -159,7 +159,7 @@ public class ServicoRelatoriosAdmin {
         int totalReclamacoesEncerradas = (int) aux.stream()
             .filter(r -> r.getStatus() == StatusReclamacoes.ENCERRADA)
             .count();
-        return (100.0 * totalReclamacoesEncerradas / totalReclamacoes);
+        return 100f * totalReclamacoesEncerradas / totalReclamacoes;
     }
 
     private void validaUsuarioAdmin(Long usuarioId) {
