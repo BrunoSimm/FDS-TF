@@ -93,8 +93,8 @@ public class AdministradorController {
     }
 
     @GetMapping(value = "/numeroMedioComentariosByPeriodo")
-    public NumeroMedioComentariosByPeriodoDTO getConsultaNumeroMedioComentariosByPeriodoUC(@RequestBody Long usuarioId,
-            @RequestBody LocalDateTime periodoInicial, @RequestBody LocalDateTime periodoFinal) {
+    public NumeroMedioComentariosByPeriodoDTO getConsultaNumeroMedioComentariosByPeriodoUC(@RequestParam Long usuarioId,
+            @RequestParam LocalDateTime periodoInicial, @RequestParam LocalDateTime periodoFinal) {
         Double mediaComentarios = consultaNumeroMedioComentariosByPeriodoUC.run(usuarioId, periodoInicial,
                 periodoFinal);
         return new NumeroMedioComentariosByPeriodoDTO(periodoInicial, periodoFinal, mediaComentarios);
@@ -115,9 +115,8 @@ public class AdministradorController {
     }
 
     @GetMapping(value = "/percentualEncerrado")
-    public PercentualEncerradoDTO getConsultaPercentualEncerradoUC(@RequestParam Long usuarioId,
-            @RequestParam String bairro) {
-        Double percentualEncerrado = consultaPercentualEncerradoUC.run(usuarioId, bairro);
+    public PercentualEncerradoDTO getConsultaPercentualEncerradoUC(@RequestParam Long usuarioId) {
+        Double percentualEncerrado = consultaPercentualEncerradoUC.run(usuarioId);
         return new PercentualEncerradoDTO(percentualEncerrado);
     }
 
