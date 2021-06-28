@@ -62,4 +62,12 @@ public class EditarReclamacaoRequisicaoDTO {
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
+
+	@Override
+	public String toString() {
+		return "EditarReclamacaoRequisicaoDTO [titulo=" + titulo + ", descricao=" + descricao + ", endereco=" + endereco
+				+ ", imagem=" + imagem + ", categoria=" + categoria + "]";
+	}
+	
+	
 }
