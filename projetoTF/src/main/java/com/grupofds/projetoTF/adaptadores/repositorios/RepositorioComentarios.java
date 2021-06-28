@@ -43,6 +43,5 @@ public interface RepositorioComentarios extends IRepositorioComentarios, JpaRepo
 	   
 	    @Query(value = "select * from comentarios where comentarios.data BETWEEN :inicio AND :final", nativeQuery = true)
 	    List<Comentario> getByPeriodo(@Param("inicio") LocalDateTime periodoInicial, @Param("final") LocalDateTime periodoFinal);
-	    
-	
+	  
 }
