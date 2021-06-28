@@ -14,22 +14,25 @@ import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 import com.grupofds.projetoTF.negocio.entidades.usuarios.CategoriaDeUsuario;
 import com.grupofds.projetoTF.negocio.entidades.usuarios.Usuario;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioComentarios;
+import com.grupofds.projetoTF.negocio.repositorios.IRepositorioEnderecos;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioUsuarios;
 
 @Service
 public class ReclamacaoServico {
 
-    private IRepositorioReclamacoes repositorioReclamacoes;
+	private IRepositorioReclamacoes repositorioReclamacoes;
     private IRepositorioUsuarios repositorioUsuarios;
-    private IRepositorioComentarios repositorioCOmentarios;
+    private IRepositorioComentarios repositorioComentarios;
+    private IRepositorioEnderecos repositorioEnderecos;
     
     @Autowired
     public ReclamacaoServico(IRepositorioReclamacoes repositorioReclamacoes, IRepositorioUsuarios repositorioUsuarios,
-			IRepositorioComentarios repositorioCOmentarios) {
+			IRepositorioComentarios repositorioCOmentarios, IRepositorioEnderecos repositorioEnderecos) {
 		this.repositorioReclamacoes = repositorioReclamacoes;
 		this.repositorioUsuarios = repositorioUsuarios;
-		this.repositorioCOmentarios = repositorioCOmentarios;
+		this.repositorioComentarios = repositorioCOmentarios;
+		this.repositorioEnderecos = repositorioEnderecos;
 	}
 
 	public Reclamacao createReclamacao(CriarReclamacaoRequisicaoDTO reclamacaoDTO) {
@@ -78,7 +81,7 @@ public class ReclamacaoServico {
 		Endereco novoEndereco = reclamacaoDTO.getEndereco();
 		if (novoEndereco != null) {
 			//TODO: verificar persistencia no banco de dados.
-			reclamacao.setEndereco(novoEndereco);
+			reclamacao.setEndereco(repositorioEnderecos.updateEndereco(novoEndereco));
 		}
 
 		String novaImagem = reclamacaoDTO.getImagem();
@@ -95,7 +98,7 @@ public class ReclamacaoServico {
     public Reclamacao getReclamacaoById(Long reclamacaoId) {
     	Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
     	
-    	reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+    	reclamacao.setComentarios(repositorioComentarios.getByReclamacao(reclamacao.getId()));
         return reclamacao; 
     }
 

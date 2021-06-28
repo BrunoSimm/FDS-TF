@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import com.grupofds.projetoTF.aplicacao.dtos.requisicoes.CriarComentarioRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Comentario;
-import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 import com.grupofds.projetoTF.negocio.servicos.ComentariosServico;
 
 @Component

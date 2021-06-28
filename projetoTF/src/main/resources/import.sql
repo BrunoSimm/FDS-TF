@@ -35,8 +35,6 @@ INSERT INTO reclamacoes (usuario_id, titulo, descricao, data, endereco_id, image
 INSERT INTO reclamacoes (usuario_id, titulo, descricao, data, endereco_id, imagem, categoria, status) VALUES (5,'Boeiro entupido','','2019-9-2',13,'zh.com.br/','Saneamento','ENCERRADA');
 INSERT INTO reclamacoes (usuario_id, titulo, descricao, data, endereco_id, imagem, categoria, status) VALUES (3,'Boca de lobo perigosa','Crianças da vizinhança alegam terem visto um palhaço dentro da calçada. Testemunhas notaram estranhos balões nos arredores.','2019-1-17',14,'','Guarda municipal','RESOLVIDA');
 
---UPDATE enderecos SET reclamacao_id = id;
-
 INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (3,'Comentario1','2021-3-1','',1);
 INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (3,'Comentario2','2021-3-2','',1);
 INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (4,'Comentario3','2021-3-3','',1);
