@@ -18,6 +18,7 @@ public class Endereco {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JoinColumn(name = "reclamacao_id", referencedColumnName = "id")
 	private Long id;
 	
 	@Column
@@ -40,34 +41,26 @@ public class Endereco {
 	@NotBlank(message = "Estado deve ser preenchido.")
 	private String estado;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "reclamacao_id", referencedColumnName = "id")
-	private Reclamacao reclamacao;
+	
+	//private Long reclamacaoId;
 
 	public Endereco(Long id, @NotBlank(message = "Bairro deve ser preenchido.") String bairro,
 			@NotBlank(message = "Logradouro deve ser preenchido.") String logradouro,
 			@Positive(message = "Numero deve ser positivo.") int numero,
 			@NotBlank(message = "Cidade deve ser preenchido.") String cidade,
-			@NotBlank(message = "Estado deve ser preenchido.") String estado, Reclamacao reclamacao) {
+			@NotBlank(message = "Estado deve ser preenchido.") String estado, Long reclamacao) {
 		this.id = id;
 		this.bairro = bairro;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.cidade = cidade;
 		this.estado = estado;
-		this.reclamacao = reclamacao;
+		//this.reclamacaoId = reclamacao;
 	}
 	
 	public Endereco() {}
 
-	public Reclamacao getReclamacao() {
-		return reclamacao;
-	}
-
-
-	public void setReclamacao(Reclamacao reclamacao) {
-		this.reclamacao = reclamacao;
-	}
+	
 
 	public Long getId() {
 		return id;
@@ -120,7 +113,7 @@ public class Endereco {
 	@Override
 	public String toString() {
 		return "Endereco [id=" + id + ", bairro=" + bairro + ", logradouro=" + logradouro + ", numero=" + numero
-				+ ", cidade=" + cidade + ", estado=" + estado + ", reclamacao=" + reclamacao + "]";
+				+ ", cidade=" + cidade + ", estado=" + estado +"]";
 	}
 	
 }

@@ -35,24 +35,24 @@ INSERT INTO reclamacoes (usuario_id, titulo, descricao, data, endereco_id, image
 INSERT INTO reclamacoes (usuario_id, titulo, descricao, data, endereco_id, imagem, categoria, status) VALUES (5,'Boeiro entupido','','2019-9-2',13,'zh.com.br/','Saneamento','ENCERRADA');
 INSERT INTO reclamacoes (usuario_id, titulo, descricao, data, endereco_id, imagem, categoria, status) VALUES (3,'Boca de lobo perigosa','Crianças da vizinhança alegam terem visto um palhaço dentro da calçada. Testemunhas notaram estranhos balões nos arredores.','2019-1-17',14,'','Guarda municipal','RESOLVIDA');
 
-UPDATE enderecos SET reclamacao_id = id;
+--UPDATE enderecos SET reclamacao_id = id;
 
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (3,'Comentario1','2021-3-1','',1);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (3,'Comentario2','2021-3-2','',1);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (4,'Comentario3','2021-3-3','',1);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (2,'Comentario4','2021-3-4','/foto1.jpg',1);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (3,'Comentario1','2021-3-1','',1);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (3,'Comentario2','2021-3-2','',1);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (4,'Comentario3','2021-3-3','',1);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (2,'Comentario4','2021-3-4','/foto1.jpg',1);
 
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (3,'Comentario5','2021-3-5','',2);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (5,'Comentario6','2021-3-6','',2);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (3,'Comentario7','2021-3-7','',2);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (2,'Comentario8','2021-3-8','/foto2.jpg',2);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (3,'Comentario5','2021-3-5','',2);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (5,'Comentario6','2021-3-6','',2);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (3,'Comentario7','2021-3-7','',2);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (2,'Comentario8','2021-3-8','/foto2.jpg',2);
 
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (2,'Comentario9','2021-3-9','',3);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (5,'Comentario10','2021-3-10','',3);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (3,'Comentario11','2021-3-11','',3);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (3,'Comentario12','2021-3-12','/foto3.jpg',3);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (2,'Comentario9','2021-3-9','',3);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (5,'Comentario10','2021-3-10','',3);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (3,'Comentario11','2021-3-11','',3);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (3,'Comentario12','2021-3-12','/foto3.jpg',3);
 
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (2,'Comentario13','2021-3-13','',4);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (4,'Comentario14','2021-3-14','',4);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (3,'Comentario15','2021-3-15','',4);
-INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, id_reclamacao_fk) VALUES (5,'Comentario16','2021-3-16','/foto4.jpg',4);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (2,'Comentario13','2021-3-13','',4);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (4,'Comentario14','2021-3-14','',4);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (3,'Comentario15','2021-3-15','',4);
+INSERT INTO comentarios (id_usuario_fk, descricao, data, imagem, reclamacao_id) VALUES (5,'Comentario16','2021-3-16','/foto4.jpg',4);

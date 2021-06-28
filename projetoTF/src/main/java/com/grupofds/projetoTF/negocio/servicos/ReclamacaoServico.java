@@ -13,6 +13,7 @@ import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 import com.grupofds.projetoTF.negocio.entidades.usuarios.CategoriaDeUsuario;
 import com.grupofds.projetoTF.negocio.entidades.usuarios.Usuario;
+import com.grupofds.projetoTF.negocio.repositorios.IRepositorioComentarios;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
 import com.grupofds.projetoTF.negocio.repositorios.IRepositorioUsuarios;
 
@@ -21,14 +22,17 @@ public class ReclamacaoServico {
 
     private IRepositorioReclamacoes repositorioReclamacoes;
     private IRepositorioUsuarios repositorioUsuarios;
+    private IRepositorioComentarios repositorioCOmentarios;
     
     @Autowired
-    public ReclamacaoServico(IRepositorioReclamacoes repositorioReclamacoes,IRepositorioUsuarios repositorioUsuarios) {
+    public ReclamacaoServico(IRepositorioReclamacoes repositorioReclamacoes, IRepositorioUsuarios repositorioUsuarios,
+			IRepositorioComentarios repositorioCOmentarios) {
 		this.repositorioReclamacoes = repositorioReclamacoes;
 		this.repositorioUsuarios = repositorioUsuarios;
+		this.repositorioCOmentarios = repositorioCOmentarios;
 	}
 
-    public Reclamacao createReclamacao(CriarReclamacaoRequisicaoDTO reclamacaoDTO) {
+	public Reclamacao createReclamacao(CriarReclamacaoRequisicaoDTO reclamacaoDTO) {
     	if (reclamacaoDTO.getUsuario_id() == null) {
 			throw new IllegalArgumentException("ERRO! Usuário Id não pode ser null.");
 		}
@@ -89,7 +93,10 @@ public class ReclamacaoServico {
     }
 
     public Reclamacao getReclamacaoById(Long reclamacaoId) {
-        return repositorioReclamacoes.getById(reclamacaoId);
+    	Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacaoId);
+    	
+    	reclamacao.setComentarios(repositorioCOmentarios.getByReclamacao(reclamacao.getId()));
+        return reclamacao; 
     }
 
     public List<Reclamacao> getReclamacoesByCategoria(String categoria) {

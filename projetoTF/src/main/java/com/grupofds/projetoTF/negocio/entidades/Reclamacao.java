@@ -8,13 +8,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -59,7 +62,8 @@ public class Reclamacao {
 	@Enumerated(EnumType.STRING)
 	private StatusReclamacoes status;
 	
-	@OneToMany(mappedBy = "reclamacao")
+	//@OneToMany(mappedBy = "reclamacoes")
+	@Transient
 	private List<Comentario> comentarios;
 	
 	public Reclamacao(Long id, Usuario usuario,

@@ -46,7 +46,7 @@ public class ComentariosServico {
             throw new IllegalArgumentException("Usuario sem permissao para encerrar a Reclamacao.");
         }
         
-        Comentario comentario = new Comentario(usuario, comentarioDTO.getDescricao(), LocalDateTime.now(), comentarioDTO.getImagem(), reclamacao);
+        Comentario comentario = new Comentario(usuario, comentarioDTO.getDescricao(), LocalDateTime.now(), comentarioDTO.getImagem(), reclamacao.getId());
         System.out.println(comentario);
         return this.repositorioComentarios.addComentario(comentario);
     }
@@ -61,7 +61,7 @@ public class ComentariosServico {
             throw new IllegalArgumentException("Usuario sem permissao para alterar o Comentario.");
         }
         
-        Reclamacao reclamacao = repositorioReclamacoes.getById(comentario.getReclamacao().getId());
+        Reclamacao reclamacao = repositorioReclamacoes.getById(comentario.getId());
         
         if (usuario.getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
             if (reclamacao.getStatus() == StatusReclamacoes.ENCERRADA) {
@@ -75,7 +75,7 @@ public class ComentariosServico {
         comentario.setDescricao(mensagem);
         comentario.setImagem(imagem);
         comentario.setData(LocalDateTime.now());
-        comentario.getReclamacao().setStatus(status);
+        //comentario.getReclamacao().setStatus(status);
         //Atualizando status da reclamacação.
         this.repositorioReclamacoes.updateReclamacao(reclamacao); 
         //Atualizando comentario.
