@@ -94,10 +94,12 @@ public class AdministradorController {
 
     @GetMapping(value = "/numeroMedioComentariosByPeriodo")
     public NumeroMedioComentariosByPeriodoDTO getConsultaNumeroMedioComentariosByPeriodoUC(@RequestParam Long usuarioId,
-            @RequestParam LocalDateTime periodoInicial, @RequestParam LocalDateTime periodoFinal) {
-        Double mediaComentarios = consultaNumeroMedioComentariosByPeriodoUC.run(usuarioId, periodoInicial,
-                periodoFinal);
-        return new NumeroMedioComentariosByPeriodoDTO(periodoInicial, periodoFinal, mediaComentarios);
+            @RequestParam String periodoInicial, @RequestParam String periodoFinal) {
+        LocalDateTime periodoInicialLDT = LocalDateTime.parse(periodoInicial);
+        LocalDateTime periodoFinalLDT = LocalDateTime.parse(periodoFinal);
+        Double mediaComentarios = consultaNumeroMedioComentariosByPeriodoUC.run(usuarioId, periodoInicialLDT,
+                periodoFinalLDT);
+        return new NumeroMedioComentariosByPeriodoDTO(periodoInicialLDT, periodoFinalLDT, mediaComentarios);
     }
 
     @GetMapping(value = "/percentualEncerradoByBairro")
@@ -148,19 +150,23 @@ public class AdministradorController {
     }
 
     @GetMapping(value = "/totalReclamacoesByBairro")
-    public TotalReclamacoesByBairroDTO getConsultaTotalReclamacoesByBairroUC(@RequestBody Long usuarioId,
-            @RequestBody String bairro, @RequestBody LocalDateTime periodoInicial,
-            @RequestBody LocalDateTime periodoFinal) {
-        Long totalReclamacoes = consultaTotalReclamacoesByBairroUC.run(usuarioId, bairro, periodoInicial, periodoFinal);
+    public TotalReclamacoesByBairroDTO getConsultaTotalReclamacoesByBairroUC(@RequestParam Long usuarioId,
+            @RequestParam String bairro, @RequestParam String periodoInicial,
+            @RequestParam String periodoFinal) {
+        LocalDateTime periodoInicialLDT = LocalDateTime.parse(periodoInicial);
+        LocalDateTime periodoFinalLDT = LocalDateTime.parse(periodoFinal);
+        Long totalReclamacoes = consultaTotalReclamacoesByBairroUC.run(usuarioId, bairro, periodoInicialLDT, periodoFinalLDT);
         return new TotalReclamacoesByBairroDTO(bairro, totalReclamacoes);
     }
 
     @GetMapping(value = "/totalReclamacoesByCategoria")
-    public TotalReclamacoesByCategoriaDTO getConsultaTotalReclamacoesByCategoriaUC(@RequestBody Long usuarioId,
-            @RequestBody String categoria, @RequestBody LocalDateTime periodoInicial,
-            @RequestBody LocalDateTime periodoFinal) {
-        Long totalReclamacoes = consultaTotalReclamacoesByCategoriaUC.run(usuarioId, categoria, periodoInicial,
-                periodoFinal);
+    public TotalReclamacoesByCategoriaDTO getConsultaTotalReclamacoesByCategoriaUC(@RequestBody long usuarioId,
+            @RequestBody String categoria, @RequestBody String periodoInicial,
+            @RequestBody String periodoFinal) {
+        LocalDateTime periodoInicialLDT = LocalDateTime.parse(periodoInicial);
+        LocalDateTime periodoFinalLDT = LocalDateTime.parse(periodoFinal);
+        Long totalReclamacoes = consultaTotalReclamacoesByCategoriaUC.run(usuarioId, categoria, periodoInicialLDT,
+                periodoFinalLDT);
         return new TotalReclamacoesByCategoriaDTO(categoria, totalReclamacoes);
     }
 
