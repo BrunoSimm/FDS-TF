@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.grupofds.projetoTF.aplicacao.dtos.ReclamacaoRequisicaoDTO;
+import com.grupofds.projetoTF.aplicacao.dtos.requisicoes.CriarReclamacaoRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 import com.grupofds.projetoTF.negocio.entidades.usuarios.CategoriaDeUsuario;
@@ -40,7 +40,7 @@ public class ReclamacaoServico {
     	} else throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido."); //TODO -> UserNotFoundException
     }
 
-    public Reclamacao createReclamacao(ReclamacaoRequisicaoDTO reclamacaoDTO) {
+    public Reclamacao createReclamacao(CriarReclamacaoRequisicaoDTO reclamacaoDTO) {
     	if (reclamacaoDTO.getUsuario_id() != null) {
     		
     		Usuario usuario = repositorioUsuarios.getById(reclamacaoDTO.getUsuario_id());

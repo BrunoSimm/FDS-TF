@@ -23,7 +23,8 @@ public interface RepositorioReclamacoes extends IRepositorioReclamacoes, JpaRepo
     	return this.save(reclamacao);
     }
     
-    Reclamacao getById(Long id);
+    @Query(value = "select * from reclamacoes where reclamacoes.id = :id", nativeQuery = true)
+    Reclamacao getById(@Param("id") Long id);
     
     @Query(value = "select * from reclamacoes where reclamacoes.usuario_id = :userId", nativeQuery = true)
     List<Reclamacao> getByUsuario(@Param("userId") Long id);
