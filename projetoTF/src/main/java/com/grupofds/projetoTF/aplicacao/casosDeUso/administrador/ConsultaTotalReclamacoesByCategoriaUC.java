@@ -12,7 +12,7 @@ public class ConsultaTotalReclamacoesByCategoriaUC {
 	@Autowired
 	private ServicoRelatoriosAdmin servicoRelatoriosAdmin;
 	
-	public void run(Long usuarioId,String categoria, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
-		this.servicoRelatoriosAdmin.getTotalReclamacoesByCategoriaAndPeriodo(usuarioId, categoria, periodoInicial, periodoFinal);
+	public Long run(Long usuarioId,String categoria, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
+		return this.servicoRelatoriosAdmin.getTotalReclamacoesByCategoriaAndPeriodo(usuarioId, categoria, periodoInicial, periodoFinal);
 	}
 }

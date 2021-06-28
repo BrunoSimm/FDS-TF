@@ -11,7 +11,7 @@ public class ConsultaNumeroMedioComentariosByCategoriaUC {
 	@Autowired
 	private ServicoRelatoriosAdmin servicoRelatoriosAdmin;
 	
-	public void run(Long usuarioId, String categoria) {
-		this.servicoRelatoriosAdmin.getNumeroMedioComentariosByCategoria(usuarioId, categoria);
+	public Double run(Long usuarioId, String categoria) {
+		return this.servicoRelatoriosAdmin.getNumeroMedioComentariosByCategoria(usuarioId, categoria);
 	}
 }

@@ -29,9 +29,10 @@ public class ComentariosServico {
 		this.repositorioUsuarios = repositorioUsuarios;
 	}
 
+
 	public Comentario addComentario(CriarComentarioRequisicaoDTO comentarioDTO) {
-        this.validaUsuario(comentarioDTO.getUsuario_id());
-        
+        this.validaPermissaoDeUsuario(comentarioDTO.getUsuario_id());
+    
         Reclamacao reclamacao = repositorioReclamacoes.getById(comentarioDTO.getReclamacao_id());
         
         if (reclamacao.getStatus() == StatusReclamacoes.ENCERRADA) {
@@ -51,7 +52,7 @@ public class ComentariosServico {
     }
 
     public Comentario editComentario(Long usuarioId, Long idComentario, String mensagem, String imagem, StatusReclamacoes status) {
-        this.validaUsuario(usuarioId);
+        this.validaPermissaoDeUsuario(usuarioId);
         
         Comentario comentario = repositorioComentarios.getById(idComentario);
         Usuario usuario = repositorioUsuarios.getById(usuarioId);
@@ -74,34 +75,14 @@ public class ComentariosServico {
         comentario.setDescricao(mensagem);
         comentario.setImagem(imagem);
         comentario.setData(LocalDateTime.now());
-        
         comentario.getReclamacao().setStatus(status);
-        this.repositorioReclamacoes.updateReclamacao(reclamacao); //Atualizando status da reclamacação.
-        
+        //Atualizando status da reclamacação.
+        this.repositorioReclamacoes.updateReclamacao(reclamacao); 
         //Atualizando comentario.
         return this.repositorioComentarios.editComentario(comentario);
     }
 
-/*     public boolean deleteComentario(Long usuarioId, Long idComentario) {
-        this.validaUsuario(usuarioId);
-        if (!repositorioUsuarios.getById(usuarioId).equals(repositorioComentarios.getById(idComentario).getUsuario())) {
-            throw new IllegalArgumentException("Usuario sem permissao para apagar o Comentario.");
-        }
-        if (repositorioUsuarios.getById(usuarioId).getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
-            if (repositorioComentarios.getById(idComentario).getReclamacao().getStatus() == StatusReclamacoes.ENCERRADA) {
-                throw new IllegalArgumentException("Impossivel apagar Comentario. Reclamacao com status ENCERRADA.");
-            }
-        }
-
-        // TODO: DELETAR (ÚLTIMO OU ALGUM) COMENTARIO, ALTERA STATUS PARA STATUS ANTERIOR OU ABERTO!?
-        // Reclamacao updatedR = repositorioComentarios.getById(idComentario).getReclamacao();
-        // updatedR.setStatus(StatusReclamacoes.ABERTA);
-        // repositorioReclamacoes.updateReclamacao(updatedR);
-
-        return this.repositorioComentarios.deleteComentario(idComentario);
-    } */
-
-    private void validaUsuario(Long usuarioId) {
+    private void validaPermissaoDeUsuario(Long usuarioId) {
         if (repositorioUsuarios.getById(usuarioId).getCategoriaDeUsuario() != CategoriaDeUsuario.CIDADAO
                 && repositorioUsuarios.getById(usuarioId).getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
             throw new IllegalArgumentException("Usuario sem permissao de acesso a funcao.");

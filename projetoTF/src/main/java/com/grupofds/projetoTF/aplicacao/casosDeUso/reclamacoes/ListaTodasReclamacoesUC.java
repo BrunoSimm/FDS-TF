@@ -9,7 +9,7 @@ import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.servicos.ReclamacaoServico;
 
 @Component
-public class ListaTodasReclamacoes {
+public class ListaTodasReclamacoesUC {
 	@Autowired
 	private ReclamacaoServico reclamacaoServico;
 	

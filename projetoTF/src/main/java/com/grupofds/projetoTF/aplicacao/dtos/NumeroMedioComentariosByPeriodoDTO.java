@@ -4,16 +4,23 @@ import java.time.LocalDateTime;
 
 public class NumeroMedioComentariosByPeriodoDTO {
 
-    private LocalDateTime periodo;
+    private LocalDateTime periodoInicial;
+    private LocalDateTime periodoFinal;
     private double mediaComentarios;
     
-    public NumeroMedioComentariosByPeriodoDTO(LocalDateTime periodo, double mediaComentarios) {
-        this.periodo = periodo;
+    public NumeroMedioComentariosByPeriodoDTO(LocalDateTime periodoInicial, LocalDateTime periodoFinal,
+            double mediaComentarios) {
+        this.periodoInicial = periodoInicial;
+        this.periodoFinal = periodoFinal;
         this.mediaComentarios = mediaComentarios;
     }
 
-    public LocalDateTime getPeriodo() {
-        return periodo;
+    public LocalDateTime getPeriodoInicial() {
+        return periodoInicial;
+    }
+    
+    public LocalDateTime getPeriodoFinal() {
+        return periodoFinal;
     }
 
     public double getMediaComentarios() {

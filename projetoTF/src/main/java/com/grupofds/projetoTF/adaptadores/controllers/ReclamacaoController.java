@@ -18,7 +18,7 @@ import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamaco
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamacoesByCategoriaUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ConsultaReclamacoesByUsuarioUC;
 import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.CriaReclamacaoUC;
-import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ListaTodasReclamacoes;
+import com.grupofds.projetoTF.aplicacao.casosDeUso.reclamacoes.ListaTodasReclamacoesUC;
 import com.grupofds.projetoTF.aplicacao.dtos.requisicoes.CriarReclamacaoRequisicaoDTO;
 import com.grupofds.projetoTF.aplicacao.dtos.requisicoes.EditarReclamacaoRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
@@ -33,14 +33,16 @@ public class ReclamacaoController {
 	private ConsultaReclamacoesByCategoriaUC consultaReclamacoesByCategoriaUC;
 	private ConsultaReclamacoesByUsuarioUC consultaReclamacoesByUsuarioUC;
 	private CriaReclamacaoUC criaReclamacaoUC;
-	private ListaTodasReclamacoes listaTodasReclamacoesUC;
+	private ListaTodasReclamacoesUC listaTodasReclamacoesUC;
 	
 	@Autowired
 	public ReclamacaoController(AtualizaReclamacaoUC atualizaReclamacaoUC,
 			ConsultaReclamacaoByIdUC consultaReclamacaoByIdUC,
 			ConsultaReclamacoesByBairroUC consultaReclamacoesByBairroUC,
 			ConsultaReclamacoesByCategoriaUC consultaReclamacoesByCategoriaUC,
-			ConsultaReclamacoesByUsuarioUC consultaReclamacoesByUsuarioUC, CriaReclamacaoUC criaReclamacaoUC, ListaTodasReclamacoes listaTodasReclamacoesUC) {
+			ConsultaReclamacoesByUsuarioUC consultaReclamacoesByUsuarioUC,
+			CriaReclamacaoUC criaReclamacaoUC,
+			ListaTodasReclamacoesUC listaTodasReclamacoesUC) {
 		this.atualizaReclamacaoUC = atualizaReclamacaoUC;
 		this.consultaReclamacaoByIdUC = consultaReclamacaoByIdUC;
 		this.consultaReclamacoesByBairroUC = consultaReclamacoesByBairroUC;

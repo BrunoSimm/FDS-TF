@@ -11,8 +11,8 @@ public class ConsultaNumeroMedioComentariosByBairroUC {
 	@Autowired
 	private ServicoRelatoriosAdmin servicoRelatoriosAdmin;
 	
-	public void run(Long usuarioId, String bairro) {
-		this.servicoRelatoriosAdmin.getNumeroMedioComentariosByBairro(usuarioId, bairro);
+	public Double run(Long usuarioId, String bairro) {
+		return this.servicoRelatoriosAdmin.getNumeroMedioComentariosByBairro(usuarioId, bairro);
 	}
 	
 }

@@ -10,7 +10,7 @@ public class ConsultaPercentualResolvidoByBairroUC {
 	@Autowired
 	private ServicoRelatoriosAdmin servicoRelatoriosAdmin;
 	
-	public void run(Long usuarioId,String bairro) {
-		this.servicoRelatoriosAdmin.getPercentualResolvidoByBairro(usuarioId, bairro);
+	public Double run(Long usuarioId,String bairro) {
+		return this.servicoRelatoriosAdmin.getPercentualResolvidoByBairro(usuarioId, bairro);
 	}
 }

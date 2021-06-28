@@ -10,7 +10,7 @@ public class ConsultaPercentualResolvidoByCategoriaUC {
 	@Autowired
 	private ServicoRelatoriosAdmin servicoRelatoriosAdmin;
 	
-	public void run(Long usuarioId, String categoria) {
-		this.servicoRelatoriosAdmin.getPercentualResolvidoByCategoria(usuarioId, categoria);
+	public Double run(Long usuarioId, String categoria) {
+		return this.servicoRelatoriosAdmin.getPercentualResolvidoByCategoria(usuarioId, categoria);
 	}
 }
