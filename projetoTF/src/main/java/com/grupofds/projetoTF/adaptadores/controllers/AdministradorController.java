@@ -28,8 +28,8 @@ import com.grupofds.projetoTF.aplicacao.dtos.TotalReclamacoesByBairroDTO;
 import com.grupofds.projetoTF.aplicacao.dtos.TotalReclamacoesByCategoriaDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -94,12 +94,11 @@ public class AdministradorController {
 
     @GetMapping(value = "/numeroMedioComentariosByPeriodo")
     public NumeroMedioComentariosByPeriodoDTO getConsultaNumeroMedioComentariosByPeriodoUC(@RequestParam Long usuarioId,
-            @RequestParam String periodoInicial, @RequestParam String periodoFinal) {
-        LocalDateTime periodoInicialLDT = LocalDateTime.parse(periodoInicial);
-        LocalDateTime periodoFinalLDT = LocalDateTime.parse(periodoFinal);
-        Double mediaComentarios = consultaNumeroMedioComentariosByPeriodoUC.run(usuarioId, periodoInicialLDT,
-                periodoFinalLDT);
-        return new NumeroMedioComentariosByPeriodoDTO(periodoInicialLDT, periodoFinalLDT, mediaComentarios);
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime periodoInicial,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime periodoFinal) {
+        Double mediaComentarios = consultaNumeroMedioComentariosByPeriodoUC.run(usuarioId, periodoInicial,
+                periodoFinal);
+        return new NumeroMedioComentariosByPeriodoDTO(periodoInicial, periodoFinal, mediaComentarios);
     }
 
     @GetMapping(value = "/percentualEncerradoByBairro")
@@ -151,22 +150,20 @@ public class AdministradorController {
 
     @GetMapping(value = "/totalReclamacoesByBairro")
     public TotalReclamacoesByBairroDTO getConsultaTotalReclamacoesByBairroUC(@RequestParam Long usuarioId,
-            @RequestParam String bairro, @RequestParam String periodoInicial,
-            @RequestParam String periodoFinal) {
-        LocalDateTime periodoInicialLDT = LocalDateTime.parse(periodoInicial);
-        LocalDateTime periodoFinalLDT = LocalDateTime.parse(periodoFinal);
-        Long totalReclamacoes = consultaTotalReclamacoesByBairroUC.run(usuarioId, bairro, periodoInicialLDT, periodoFinalLDT);
+            @RequestParam String bairro,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime periodoInicial,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime periodoFinal) {
+        Long totalReclamacoes = consultaTotalReclamacoesByBairroUC.run(usuarioId, bairro, periodoInicial, periodoFinal);
         return new TotalReclamacoesByBairroDTO(bairro, totalReclamacoes);
     }
 
     @GetMapping(value = "/totalReclamacoesByCategoria")
     public TotalReclamacoesByCategoriaDTO getConsultaTotalReclamacoesByCategoriaUC(@RequestParam long usuarioId,
-            @RequestParam String categoria, @RequestParam String periodoInicial,
-            @RequestParam String periodoFinal) {
-        LocalDateTime periodoInicialLDT = LocalDateTime.parse(periodoInicial);
-        LocalDateTime periodoFinalLDT = LocalDateTime.parse(periodoFinal);
-        Long totalReclamacoes = consultaTotalReclamacoesByCategoriaUC.run(usuarioId, categoria, periodoInicialLDT,
-                periodoFinalLDT);
+            @RequestParam String categoria,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime periodoInicial,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime periodoFinal) {
+        Long totalReclamacoes = consultaTotalReclamacoesByCategoriaUC.run(usuarioId, categoria, periodoInicial,
+                periodoFinal);
         return new TotalReclamacoesByCategoriaDTO(categoria, totalReclamacoes);
     }
 
