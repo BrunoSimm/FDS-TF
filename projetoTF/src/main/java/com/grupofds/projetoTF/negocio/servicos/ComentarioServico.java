@@ -83,9 +83,10 @@ public class ComentarioServico {
         comentario.setDescricao(mensagem);
         comentario.setImagem(imagem);
         comentario.setData(LocalDateTime.now());
-        //comentario.getReclamacao().setStatus(status);
+        
         //Atualizando status da reclamacação.
-        this.repositorioReclamacoes.updateReclamacao(reclamacao); 
+        repositorioReclamacoes.updateStatus(status.toString(), comentario.getReclamacaoId());
+        
         //Atualizando comentario.
         return this.repositorioComentarios.editComentario(comentario);
     }
