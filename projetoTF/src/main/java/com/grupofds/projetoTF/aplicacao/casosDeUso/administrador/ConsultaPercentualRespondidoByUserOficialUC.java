@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.grupofds.projetoTF.aplicacao.dtos.PercentualRespondidoByUserOficialDTO;
-import com.grupofds.projetoTF.aplicacao.servicos.ServicoRelatoriosAdmin;
+import com.grupofds.projetoTF.aplicacao.servicos.RelatoriosAdminServico;
 
 @Component
 public class ConsultaPercentualRespondidoByUserOficialUC {
 	@Autowired
-	private ServicoRelatoriosAdmin servicoRelatoriosAdmin;
+	private RelatoriosAdminServico relatoriosAdminServico;
 	
 	public PercentualRespondidoByUserOficialDTO run(Long usuarioId, Long idUsuarioOficial) {
-		return this.servicoRelatoriosAdmin.getPercentualRespondidoByUserOficial(usuarioId, idUsuarioOficial);
+		return this.relatoriosAdminServico.getPercentualRespondidoByUserOficial(usuarioId, idUsuarioOficial);
 	}
 }

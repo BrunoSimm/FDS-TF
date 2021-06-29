@@ -3,6 +3,9 @@ package com.grupofds.projetoTF.adaptadores.repositorios;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
+import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
+import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,10 +13,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
-import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
-import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
 
 @Repository
 public interface RepositorioReclamacoes extends IRepositorioReclamacoes, JpaRepository<Reclamacao, Long> {
