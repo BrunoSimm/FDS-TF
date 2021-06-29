@@ -18,10 +18,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.TransactionSystemException;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
+//@SpringBootTest
 public class RepositorioReclamacoesTest {
 
     @Autowired
@@ -48,6 +51,27 @@ public class RepositorioReclamacoesTest {
     public void insertReclamacaoIncompleta() {
         Reclamacao reclamacao = new Reclamacao();
         assertThrows(ConstraintViolationException.class, () -> repositorioReclamacoes.createReclamacao(reclamacao));
+    }
+
+    @Test
+    public void editReclamacaoCompleta() {
+        Reclamacao reclamacao = repositorioReclamacoes.getById(1L);
+        reclamacao.setCategoria("Teste");
+        reclamacao.setTitulo("TituloTeste");
+        reclamacao.setData(LocalDateTime.now());
+        repositorioReclamacoes.updateReclamacao(reclamacao);
+
+        assertEquals(reclamacao, repositorioReclamacoes.getById(1L));
+    }
+    
+    @Test
+    public void editReclamacaoIncompleta() {
+        Reclamacao reclamacao = repositorioReclamacoes.getById(1L);
+        reclamacao.setCategoria("");
+        reclamacao.setTitulo("");
+        reclamacao.setData(LocalDateTime.now());
+
+        assertThrows(ConstraintViolationException.class, () -> repositorioReclamacoes.getById(1L));
     }
 
 }
