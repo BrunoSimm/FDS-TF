@@ -43,11 +43,19 @@ public class ComentariosServico {
         
         if (comentarioDTO.getStatus() == StatusReclamacoes.ENCERRADA
                 && usuario.getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
-            throw new IllegalArgumentException("Usuario sem permissao para encerrar a Reclamacao.");
+        	throw new IllegalArgumentException("Usuario sem permissao para encerrar a Reclamacao.");
+        } else {
+        	reclamacao.setStatus(StatusReclamacoes.ENCERRADA); //Hibernate já IRÁ ATUALIZAR o registro.
+        }
+        
+        if (comentarioDTO.getStatus() == StatusReclamacoes.RESOLVIDA && (usuario.getCategoriaDeUsuario() == CategoriaDeUsuario.CIDADAO || usuario.getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL)) {
+        	reclamacao.setStatus(StatusReclamacoes.RESOLVIDA); //Hibernate já irá atualizar o registro.
+        } else {
+        	throw new IllegalArgumentException("Usuario sem permissao para Resolver a Reclamacao.");
         }
         
         Comentario comentario = new Comentario(usuario, comentarioDTO.getDescricao(), LocalDateTime.now(), comentarioDTO.getImagem(), reclamacao.getId());
-        System.out.println(comentario);
+        
         return this.repositorioComentarios.addComentario(comentario);
     }
 

@@ -17,9 +17,10 @@ import com.grupofds.projetoTF.negocio.repositorios.IRepositorioComentarios;
 @Repository
 public interface RepositorioComentarios extends IRepositorioComentarios, JpaRepository<Comentario,Long> {
 		
-		 @Query(value = "INSERT INTO comentarios(id_usuario_fk,descricao,data,imagem,id_reclamacao_fk) "
-		 		+ "VALUES(:#{#c.usuario}, :#{#c.descricao}, :#{#c.data}, :#{#c.imagem}, :#{#c.reclamacao});", nativeQuery = true) //TODO
-	 	 Comentario addComentario(@Param("c")Comentario comentario);
+		 
+	 	default Comentario addComentario(Comentario comentario){
+		 	return this.save(comentario);
+		}
 	 	 
 	 	default Comentario editComentario(Comentario comentario) {
 	 		return this.save(comentario);

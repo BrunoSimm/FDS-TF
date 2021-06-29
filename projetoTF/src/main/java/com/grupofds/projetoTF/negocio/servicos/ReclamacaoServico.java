@@ -35,7 +35,7 @@ public class ReclamacaoServico {
 		this.repositorioEnderecos = repositorioEnderecos;
 	}
 
-	public Reclamacao createReclamacao(CriarReclamacaoRequisicaoDTO reclamacaoDTO) {
+	public Reclamacao createReclamacao(CriarReclamacaoRequisicaoDTO reclamacaoDTO) { //Refatorar para atributos
     	if (reclamacaoDTO.getUsuario_id() == null) {
 			throw new IllegalArgumentException("ERRO! Usuário Id não pode ser null.");
 		}
@@ -53,7 +53,7 @@ public class ReclamacaoServico {
 		return repositorioReclamacoes.createReclamacao(reclamacao);
     }
 
-	public Reclamacao updateReclamacao(Long usuarioId, Long reclamacaoId, EditarReclamacaoRequisicaoDTO reclamacaoDTO) {
+	public Reclamacao updateReclamacao(Long usuarioId, Long reclamacaoId, EditarReclamacaoRequisicaoDTO reclamacaoDTO) { //
 		Usuario user = repositorioUsuarios.getById(usuarioId);
     	if (user == null) {
 			throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
