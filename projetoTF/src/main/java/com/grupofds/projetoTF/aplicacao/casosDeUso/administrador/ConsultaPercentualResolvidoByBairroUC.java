@@ -3,12 +3,12 @@ package com.grupofds.projetoTF.aplicacao.casosDeUso.administrador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.grupofds.projetoTF.aplicacao.servicos.relatoriosAdminServico;
+import com.grupofds.projetoTF.aplicacao.servicos.RelatoriosAdminServico;
 
 @Component
 public class ConsultaPercentualResolvidoByBairroUC {
 	@Autowired
-	private relatoriosAdminServico relatoriosAdminServico;
+	private RelatoriosAdminServico relatoriosAdminServico;
 	
 	public Double run(Long usuarioId,String bairro) {
 		return this.relatoriosAdminServico.getPercentualResolvidoByBairro(usuarioId, bairro);
