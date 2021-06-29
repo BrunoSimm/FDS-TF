@@ -1,6 +1,5 @@
 package com.grupofds.projetoTF.negocio.servicos;
 
-import com.grupofds.projetoTF.aplicacao.dtos.requisicoes.CriarComentarioRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Comentario;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
@@ -30,31 +29,31 @@ public class ComentarioServico {
 	}
 
 
-	public Comentario addComentario(CriarComentarioRequisicaoDTO comentarioDTO) {
-        this.validaPermissaoDeUsuario(comentarioDTO.getUsuario_id());
+	public Comentario addComentario(Long usuario_id, String descricao, String imagem, Long reclamacao_id, StatusReclamacoes status) {//REFATORAR P ATRIBUTO
+        this.validaPermissaoDeUsuario(usuario_id);
     
-        Reclamacao reclamacao = repositorioReclamacoes.getById(comentarioDTO.getReclamacao_id());
+        Reclamacao reclamacao = repositorioReclamacoes.getById(reclamacao_id);
         
         if (reclamacao.getStatus() == StatusReclamacoes.ENCERRADA) {
             throw new IllegalArgumentException("Impossivel adicionar Comentario. Reclamacao com status ENCERRADA.");
         }
         
-        Usuario usuario = repositorioUsuarios.getById(comentarioDTO.getUsuario_id());
+        Usuario usuario = repositorioUsuarios.getById(usuario_id);
         
-        if (comentarioDTO.getStatus() == StatusReclamacoes.ENCERRADA
+        if (status == StatusReclamacoes.ENCERRADA
                 && usuario.getCategoriaDeUsuario() != CategoriaDeUsuario.USUARIO_OFICIAL) {
         	throw new IllegalArgumentException("Usuario sem permissao para encerrar a Reclamacao.");
         } else {
         	reclamacao.setStatus(StatusReclamacoes.ENCERRADA); //Hibernate já IRÁ ATUALIZAR o registro.
         }
         
-        if (comentarioDTO.getStatus() == StatusReclamacoes.RESOLVIDA && (usuario.getCategoriaDeUsuario() == CategoriaDeUsuario.CIDADAO || usuario.getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL)) {
+        if (status == StatusReclamacoes.RESOLVIDA && (usuario.getCategoriaDeUsuario() == CategoriaDeUsuario.CIDADAO || usuario.getCategoriaDeUsuario() == CategoriaDeUsuario.USUARIO_OFICIAL)) {
         	reclamacao.setStatus(StatusReclamacoes.RESOLVIDA); //Hibernate já irá atualizar o registro.
         } else {
         	throw new IllegalArgumentException("Usuario sem permissao para Resolver a Reclamacao.");
         }
         
-        Comentario comentario = new Comentario(usuario, comentarioDTO.getDescricao(), LocalDateTime.now(), comentarioDTO.getImagem(), reclamacao.getId());
+        Comentario comentario = new Comentario(usuario, descricao, LocalDateTime.now(), imagem, reclamacao.getId());
         
         return this.repositorioComentarios.addComentario(comentario);
     }

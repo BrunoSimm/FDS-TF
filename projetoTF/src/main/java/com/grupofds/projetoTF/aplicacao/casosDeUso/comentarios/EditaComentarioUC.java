@@ -1,7 +1,7 @@
 package com.grupofds.projetoTF.aplicacao.casosDeUso.comentarios;
 
-import com.grupofds.projetoTF.aplicacao.dtos.requisicoes.EditarComentarioRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Comentario;
+import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 import com.grupofds.projetoTF.negocio.servicos.ComentarioServico;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,8 @@ public class EditaComentarioUC {
 		this.comentarioServico = comentarioServico;
 	}
 	
-	public Comentario run(EditarComentarioRequisicaoDTO editarComentarioDTO) {
-		return this.comentarioServico.editComentario(editarComentarioDTO.getUsuario_id(), editarComentarioDTO.getIdComentario(), editarComentarioDTO.getDescricao(), editarComentarioDTO.getImagem(), editarComentarioDTO.getStatus());
+	public Comentario run(Long usuario_id, Long idComentario, String descricao, String imagem, StatusReclamacoes status) {
+		return this.comentarioServico.editComentario(usuario_id,idComentario, descricao,imagem,status);
 	}
 	
 }

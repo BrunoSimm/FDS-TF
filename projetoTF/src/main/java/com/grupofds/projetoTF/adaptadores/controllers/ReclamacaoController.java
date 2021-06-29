@@ -54,8 +54,7 @@ public class ReclamacaoController {
 
 	@PutMapping(value = "/id/{idReclamacao}") // /id/3?idUsuario=11
 	public Reclamacao atualizaReclamacao(@PathVariable Long idReclamacao, @RequestParam Long idUsuario, @RequestBody EditarReclamacaoRequisicaoDTO reclamacao) {
-		System.out.println(reclamacao);
-		return atualizaReclamacaoUC.run(idUsuario, idReclamacao, reclamacao);
+		return atualizaReclamacaoUC.run(idUsuario, idReclamacao,reclamacao.getTitulo(),reclamacao.getDescricao(),reclamacao.getEndereco(),reclamacao.getImagem(),reclamacao.getCategoria());
 	}
 	
 	@GetMapping(value = "/id")
@@ -80,7 +79,7 @@ public class ReclamacaoController {
 	
 	@PostMapping
 	public Reclamacao criaReclamacao(@RequestBody CriarReclamacaoRequisicaoDTO reclamacaoDTO) {
-		return criaReclamacaoUC.run(reclamacaoDTO);
+		return criaReclamacaoUC.run(reclamacaoDTO.getUsuario_id(),reclamacaoDTO.getTitulo(),reclamacaoDTO.getDescricao(),reclamacaoDTO.getEndereco(),reclamacaoDTO.getImagem(),reclamacaoDTO.getCategoria());
 	}
 	
 	@GetMapping

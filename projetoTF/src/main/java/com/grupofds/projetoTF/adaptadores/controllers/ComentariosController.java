@@ -29,12 +29,13 @@ public class ComentariosController {
 	
 	@PostMapping
 	public Comentario adicionaComentarioUC(@RequestBody CriarComentarioRequisicaoDTO comentarioDTO) {
-		return adicionaComentarioUC.run(comentarioDTO);
-	}//ok
+		return adicionaComentarioUC.run(comentarioDTO.getUsuario_id(),comentarioDTO.getDescricao(),comentarioDTO.getImagem(),comentarioDTO.getReclamacao_id(),comentarioDTO.getStatus());
+	}
 	
 	@PutMapping
 	public Comentario editaComentarioUC(@RequestBody EditarComentarioRequisicaoDTO editarComentarioRequisicaoDTO) {
-		return editaComentarioUC.run(editarComentarioRequisicaoDTO);
+		return editaComentarioUC.run(editarComentarioRequisicaoDTO.getUsuario_id(),editarComentarioRequisicaoDTO.getIdComentario(),
+				editarComentarioRequisicaoDTO.getDescricao(),editarComentarioRequisicaoDTO.getImagem(),editarComentarioRequisicaoDTO.getStatus());
 	}
 
 }

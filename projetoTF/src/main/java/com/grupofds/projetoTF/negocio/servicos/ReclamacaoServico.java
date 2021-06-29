@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.grupofds.projetoTF.aplicacao.dtos.requisicoes.CriarReclamacaoRequisicaoDTO;
-import com.grupofds.projetoTF.aplicacao.dtos.requisicoes.EditarReclamacaoRequisicaoDTO;
 import com.grupofds.projetoTF.negocio.entidades.Endereco;
 import com.grupofds.projetoTF.negocio.entidades.Reclamacao;
 import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
@@ -35,12 +33,12 @@ public class ReclamacaoServico {
 		this.repositorioEnderecos = repositorioEnderecos;
 	}
 
-	public Reclamacao createReclamacao(CriarReclamacaoRequisicaoDTO reclamacaoDTO) { //Refatorar para atributos
-    	if (reclamacaoDTO.getUsuario_id() == null) {
+	public Reclamacao createReclamacao(Long usuario_id,String titulo, String descricao, Endereco endereco, String imagem, String categoria) { //Refatorar para atributos
+    	if (usuario_id == null) {
 			throw new IllegalArgumentException("ERRO! Usuário Id não pode ser null.");
 		}
 
-		Usuario usuario = repositorioUsuarios.getById(reclamacaoDTO.getUsuario_id());
+		Usuario usuario = repositorioUsuarios.getById(usuario_id);
 		if((usuario.getId() == null)) {
 			throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
 		}
@@ -48,12 +46,13 @@ public class ReclamacaoServico {
 			throw new IllegalArgumentException("ERRO! Usuário não possui permissão para criar nova Reclamação.");
 		}
 
-		Reclamacao reclamacao = new Reclamacao(null, usuario, reclamacaoDTO.getTitulo(), reclamacaoDTO.getDescricao(), LocalDateTime.now(), 
-				reclamacaoDTO.getEndereco() , reclamacaoDTO.getImagem(), reclamacaoDTO.getCategoria(), StatusReclamacoes.ABERTA, null);
+		Reclamacao reclamacao = new Reclamacao(null, usuario, titulo, descricao, LocalDateTime.now(), 
+				endereco , imagem, categoria, StatusReclamacoes.ABERTA, null);
 		return repositorioReclamacoes.createReclamacao(reclamacao);
     }
 
-	public Reclamacao updateReclamacao(Long usuarioId, Long reclamacaoId, EditarReclamacaoRequisicaoDTO reclamacaoDTO) { //
+	public Reclamacao updateReclamacao(Long usuarioId, Long reclamacaoId, 
+			String titulo, String descricao, Endereco endereco, String imagem, String categoria) { //
 		Usuario user = repositorioUsuarios.getById(usuarioId);
     	if (user == null) {
 			throw new IllegalArgumentException("ERRO! Usuário não encontrado. Indique um Id válido.");
@@ -69,26 +68,26 @@ public class ReclamacaoServico {
 		}
 
 		//Valida novos dados da Reclamacao.
-		String novoTitulo = reclamacaoDTO.getTitulo();
+		String novoTitulo = titulo;
 		if (novoTitulo != null && !novoTitulo.isBlank() && !novoTitulo.isEmpty()) {
 			reclamacao.setTitulo(novoTitulo);
 		}
 
-		String novaDescricao = reclamacaoDTO.getDescricao();
+		String novaDescricao = descricao;
 		if (novaDescricao != null && !novaDescricao.isBlank() && !novaDescricao.isEmpty()) {
 			reclamacao.setDescricao(novaDescricao);
 		}
 
-		Endereco novoEndereco = reclamacaoDTO.getEndereco();
+		Endereco novoEndereco = endereco;
 		if (novoEndereco != null) {
 			//TODO: verificar persistencia no banco de dados.
 			reclamacao.setEndereco(repositorioEnderecos.updateEndereco(novoEndereco));
 		}
 
-		String novaImagem = reclamacaoDTO.getImagem();
+		String novaImagem = imagem;
 		reclamacao.setImagem(novaImagem);
 		
-		String novaCategoria = reclamacaoDTO.getCategoria();
+		String novaCategoria = categoria;
 		if (novaCategoria != null && !novaCategoria.isBlank() && !novaCategoria.isEmpty()) {
 			reclamacao.setCategoria(novaCategoria);
 		}
