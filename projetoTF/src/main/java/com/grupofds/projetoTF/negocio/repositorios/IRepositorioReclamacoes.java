@@ -9,7 +9,6 @@ import com.grupofds.projetoTF.negocio.entidades.StatusReclamacoes;
 public interface IRepositorioReclamacoes {
     Reclamacao createReclamacao(Reclamacao reclamacao);
     Reclamacao updateReclamacao(Reclamacao reclamacao);
-    void updateStatus(String status, Long idReclamacao);
     Reclamacao getById(Long id);
     List<Reclamacao> getByUsuario(Long idUsuario);
     List<Reclamacao> getReclamacoesByStatus(StatusReclamacoes status);
