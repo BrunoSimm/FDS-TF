@@ -16,13 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ComentariosServico {
+public class ComentarioServico {
     private IRepositorioComentarios repositorioComentarios;
     private IRepositorioReclamacoes repositorioReclamacoes;
     private IRepositorioUsuarios repositorioUsuarios;
     
     @Autowired
-    public ComentariosServico(IRepositorioComentarios repositorioComentarios,
+    public ComentarioServico(IRepositorioComentarios repositorioComentarios,
 			IRepositorioReclamacoes repositorioReclamacoes, IRepositorioUsuarios repositorioUsuarios) {
 		this.repositorioComentarios = repositorioComentarios;
 		this.repositorioReclamacoes = repositorioReclamacoes;

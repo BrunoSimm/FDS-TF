@@ -3,6 +3,8 @@ package com.grupofds.projetoTF.adaptadores.repositorios;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,7 +17,7 @@ import com.grupofds.projetoTF.negocio.repositorios.IRepositorioReclamacoes;
 @Repository
 public interface RepositorioReclamacoes extends IRepositorioReclamacoes, JpaRepository<Reclamacao, Long> {
 	
-	default Reclamacao createReclamacao(Reclamacao reclamacao) {
+	default Reclamacao createReclamacao(Reclamacao reclamacao) throws ConstraintViolationException {
 		return this.save(reclamacao);
 	}
 	
