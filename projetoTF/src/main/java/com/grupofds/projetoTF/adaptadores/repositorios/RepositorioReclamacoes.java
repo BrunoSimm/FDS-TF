@@ -3,7 +3,10 @@ package com.grupofds.projetoTF.adaptadores.repositorios;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -22,6 +25,11 @@ public interface RepositorioReclamacoes extends IRepositorioReclamacoes, JpaRepo
     default Reclamacao updateReclamacao(Reclamacao reclamacao) {
     	return this.save(reclamacao);
     }
+    
+    @Modifying //Permite a edição de recursos do bd
+    @Transactional
+    @Query(value = "UPDATE reclamacoes SET status = :status WHERE id = :idReclamacao", nativeQuery = true)
+    void updateStatus(@Param("status") String status, @Param("idReclamacao") Long idReclamacao);
     
     @Query(value = "select * from reclamacoes where reclamacoes.id = :id", nativeQuery = true)
     Reclamacao getById(@Param("id") Long id);
