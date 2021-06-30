@@ -67,12 +67,15 @@ public class RelatoriosAdminServico {
     public double getNumeroMedioComentariosByPeriodo(Long usuarioId, LocalDateTime periodoInicial, LocalDateTime periodoFinal) {
         this.validaUsuarioAdmin(usuarioId);
         List<Comentario> aux = repositorioComentarios.getByPeriodo(periodoInicial, periodoFinal);
-        int totalComentarios = aux.size();
-        int totalReclamacoes = aux.stream()
+        int totalComentarios = 0;
+        totalComentarios = aux.size();
+        int totalReclamacoes = 0;
+        totalReclamacoes += aux.stream()
             .map(Comentario::getReclamacaoId)
             .collect(Collectors.toSet())
             .size();
-        return (1.0 * totalComentarios / totalReclamacoes);
+        Double resultado = (1.0 * totalComentarios / totalReclamacoes);
+        return resultado.isNaN() ? 0 : resultado;
     }
 
     public double getPercentualResolvidoByCategoria(Long usuarioId, String categoria) {
