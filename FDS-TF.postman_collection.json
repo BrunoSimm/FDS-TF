@@ -1,0 +1,661 @@
+{
+	"info": {
+		"_postman_id": "0d6e853b-9918-433b-a229-8154e49ee615",
+		"name": "FDS-TF",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Administrador",
+			"item": [
+				{
+					"name": "Média de comentários por bairro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/administrador/numeroMedioComentariosByBairro/?usuarioId=1&bairro=Centro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"administrador",
+								"numeroMedioComentariosByBairro",
+								""
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1"
+								},
+								{
+									"key": "bairro",
+									"value": "Centro"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Média de comentários por categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/administrador/numeroMedioComentariosByCategoria/?usuarioId=1&categoria=Saneamento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"administrador",
+								"numeroMedioComentariosByCategoria",
+								""
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1"
+								},
+								{
+									"key": "categoria",
+									"value": "Saneamento"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Média de comentários por periodo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/administrador/numeroMedioComentariosByPeriodo/?usuarioId=1&periodoInicial=2007-12-03T10:15:30&periodoFinal=2021-12-17T10:15:30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"administrador",
+								"numeroMedioComentariosByPeriodo",
+								""
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1"
+								},
+								{
+									"key": "periodoInicial",
+									"value": "2007-12-03T10:15:30"
+								},
+								{
+									"key": "periodoFinal",
+									"value": "2021-12-17T10:15:30"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Percentual encerrado por bairro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/administrador/percentualEncerradoByBairro/?usuarioId=1&bairro=Planalto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"administrador",
+								"percentualEncerradoByBairro",
+								""
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1"
+								},
+								{
+									"key": "bairro",
+									"value": "Planalto"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Percentual encerrado por categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/administrador/percentualEncerradoByCategoria/?usuarioId=1&categoria=Saneamento",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"administrador",
+								"percentualEncerradoByCategoria",
+								""
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1"
+								},
+								{
+									"key": "categoria",
+									"value": "Saneamento"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Percentual encerrado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/administrador/percentualEncerrado/?usuarioId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"administrador",
+								"percentualEncerrado",
+								""
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Percentual resolvido por bairro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/administrador/percentualResolvidoByBairro/?usuarioId=1&bairro=Lambari",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"administrador",
+								"percentualResolvidoByBairro",
+								""
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1"
+								},
+								{
+									"key": "bairro",
+									"value": "Lambari"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Percentual respondido por usuário oficial",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/administrador/percentualRespondidoByUserOficial/?usuarioId=1&idUsuarioOficial=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"administrador",
+								"percentualRespondidoByUserOficial",
+								""
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1"
+								},
+								{
+									"key": "idUsuarioOficial",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Percentual respondido por usuários oficiais",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/administrador/percentualRespondidoByUsersOficial/?usuarioId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"administrador",
+								"percentualRespondidoByUsersOficial",
+								""
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total reclamações por bairro e periodo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\": \"1\",\r\n    \"categoria\": \"Porto XV\",\r\n    \"periodoInicial\": \"2007-12-03T10:15:30\",\r\n    \"periodoFinal\": \"2021-12-03T10:15:30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/administrador/totalReclamacoesByBairro/?usuarioId=1&bairro=Porto XV&periodoInicial=2007-12-03T00:00:00&periodoFinal=2021-12-03T10:15:30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"administrador",
+								"totalReclamacoesByBairro",
+								""
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1"
+								},
+								{
+									"key": "bairro",
+									"value": "Porto XV"
+								},
+								{
+									"key": "periodoInicial",
+									"value": "2007-12-03T00:00:00"
+								},
+								{
+									"key": "periodoFinal",
+									"value": "2021-12-03T10:15:30"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Total reclamações por categoria e periodo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/administrador/totalReclamacoesByCategoria/?usuarioId=1&categoria=Saneamento&periodoInicial=2007-12-03T00:00:00&periodoFinal=2021-12-03T10:15:30",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"administrador",
+								"totalReclamacoesByCategoria",
+								""
+							],
+							"query": [
+								{
+									"key": "usuarioId",
+									"value": "1"
+								},
+								{
+									"key": "categoria",
+									"value": "Saneamento"
+								},
+								{
+									"key": "periodoInicial",
+									"value": "2007-12-03T00:00:00"
+								},
+								{
+									"key": "periodoFinal",
+									"value": "2021-12-03T10:15:30"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reclamações",
+			"item": [
+				{
+					"name": "Todas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reclamacoes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reclamacoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add reclamação",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario_id\": 4,\r\n    \"titulo\": \"titulo testeste\",\r\n    \"descricao\": \"descricao teste\",\r\n    \"endereco\": {\r\n        \"bairro\": \"sao joao\",\r\n        \"logradouro\": \"souza reis\",\r\n        \"numero\": 314,\r\n        \"cidade\": \"poa\",\r\n        \"estado\": \"RS\"\r\n    },\r\n    \"categoria\": \"categoria1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/reclamacoes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reclamacoes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Reclamacao",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"update titulo testeste\",\r\n    \"descricao\": \"update descricao teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/reclamacoes/id/2?idUsuario=3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reclamacoes",
+								"id",
+								"2"
+							],
+							"query": [
+								{
+									"key": "idUsuario",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "consultaReclamacoesByUsuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/reclamacoes/usuario/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reclamacoes",
+								"usuario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "consultaReclamacoesByCategoria",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoria\": \"categoria teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/reclamacoes/categoria?categoria=Iluminação Pública",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reclamacoes",
+								"categoria"
+							],
+							"query": [
+								{
+									"key": "categoria",
+									"value": "Iluminação Pública"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "consultaReclamacoesByBairro",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoria\": \"categoria teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/reclamacoes/bairro?bairro=sao joao",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reclamacoes",
+								"bairro"
+							],
+							"query": [
+								{
+									"key": "bairro",
+									"value": "sao joao"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "consultaReclamacoesById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoria\": \"categoria teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/reclamacoes/id?id=15",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"reclamacoes",
+								"id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comentarios",
+			"item": [
+				{
+					"name": "Add comentario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario_id\": 2,\r\n    \"descricao\": \"Teste Comentario\",\r\n    \"status\": \"RESOLVIDA\",\r\n    \"imagem\": \"https://lh3.googleusercontent.com/proxy/-ivI-VTOgX06ZG5WkVqB17wic_PkTdVt5oLfHVKFirzhM9wOygpcXpdYo-0snCOVLja47yBi-KdTxt7embjFY2o83Gxhh1GeupABez0q-IBLUrLVkXS0WJH2hyiH4sj-boAXh-_7kYs48l36e-A\",\r\n    \"reclamacao_id\": 15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/comentarios",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comentarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Comentario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuario_id\": \"2\",\r\n    \"idComentario\": \"4\",\r\n    \"descricao\": \"EDIT COMENTARIO TEST21\",\r\n    \"status\": \"ENCERRADA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/comentarios",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comentarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
